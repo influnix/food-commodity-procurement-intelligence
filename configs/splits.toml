@@ -1,0 +1,43 @@
+# Date-only freeze, before the Day 2 development-price change audit.
+# A fixed calendar rule, not prices or forecast scores, selects the default.
+schema_version = 1
+selected_candidate = "A_24_month_holdout"
+selection_basis = "Day0_last_24_targets_36_validation_origins_with_publication_lag_correction"
+data_start = "1960-01"
+data_end = "2026-09"
+minimum_history_months = 120
+# Evaluation needs 120 observations, but historical training candidates only
+# need a nonempty information set. Day 3 will add feature-specific lag masks.
+minimum_sample_history_months = 1
+horizons = [1, 2, 3]
+publication_lag_months = 1
+definition_boundary = "2020-07"
+holdout_locked = true
+
+[[candidates]]
+name = "A_24_month_holdout"
+train_target_start = "1960-01"
+train_target_end = "2021-06"
+validation_origin_start = "2021-06"
+validation_origin_end = "2024-05"
+validation_target_start = "2021-07"
+validation_target_end = "2024-08"
+bridge_start = "2024-09"
+bridge_end = "2024-09"
+holdout_target_start = "2024-10"
+holdout_target_end = "2026-09"
+selection_freeze_origin = "2024-09"
+
+[[candidates]]
+name = "B_36_month_holdout"
+train_target_start = "1960-01"
+train_target_end = "2020-06"
+validation_origin_start = "2020-06"
+validation_origin_end = "2023-05"
+validation_target_start = "2020-07"
+validation_target_end = "2023-08"
+bridge_start = "2023-09"
+bridge_end = "2023-09"
+holdout_target_start = "2023-10"
+holdout_target_end = "2026-09"
+selection_freeze_origin = "2023-09"

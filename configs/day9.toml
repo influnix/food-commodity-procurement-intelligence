@@ -1,0 +1,44 @@
+# Day 9 primary protocol frozen before historical procurement outcomes.
+schema_version = 1
+project_root = ".."
+day8_config = "configs/day8.toml"
+day8_config_sha256 = "6e0af6fe4e7f8e0fa9afa4dea27f9708b1d46c4f5b37aa29a1efb11f16a42619"
+split_config = "configs/splits.toml"
+split_sha256 = "209f2a35dea2bc0afc19461b6f780deb61d27b8cf5acaf5a2aaa10e5cd963741"
+report_root = "artifacts/day9"
+synthetic_root = "data/synthetic/day9"
+holdout_locked = true
+experiment_name = "Historical Price-Based Simulated Procurement Backtest"
+
+[calendar]
+initial_state_at = "2021-06"
+first_decision = "2021-06"
+last_decision = "2024-05"
+first_ledger = "2021-07"
+last_ledger = "2024-08"
+active_ledger_end = "2024-05"
+runoff_start = "2024-06"
+runoff_end = "2024-08"
+decision_count = 36
+ledger_count = 38
+runoff_new_orders = false
+future_plan_admission = "zero_q_after_last_decision"
+
+[operations]
+initial_inventory_tonnes = 200.0
+initial_pipeline = "empty"
+demand_tonnes_per_month = 100.0
+additional_delay_months = 0
+world_id = "primary_validation_historical_price_constant_demand_zero_delay"
+evaluation_seed_bank = "none_deterministic_primary_only"
+stress_worlds = []
+
+[evaluation]
+alpha = 0.90
+risk_neutral_lambda = 0.0
+risk_aware_lambda = 0.50
+policies = ["fixed", "fa_sarimax", "rn_sarimax", "ra_sarimax", "fa_lightgbm", "rn_lightgbm", "ra_lightgbm"]
+fallback = "none_abort_no_full_comparison_if_incomplete"
+terminal_mode = "global_final_month_only_require_empty_pipeline_no_salvage"
+confidence_intervals = false
+realized_market_cvar = false

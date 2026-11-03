@@ -1,0 +1,27 @@
+schema_version = 1
+project_root = ".."
+stage = "validation_seasonal_naive_only"
+day2_config = "configs/day2.toml"
+day2_config_sha256 = "2b767fb80c9637b77e322969f8d40b80b9122c9aafb1624b27c5432aba669bed"
+split_config = "configs/splits.toml"
+split_config_sha256 = "209f2a35dea2bc0afc19461b6f780deb61d27b8cf5acaf5a2aaa10e5cd963741"
+report_root = "artifacts/day3"
+expected_origins = 36
+expected_origin_horizon_pairs = 108
+holdout_locked = true
+seasonal_period = 12
+
+[features]
+lags = [1, 3, 6, 12]
+rolling_windows = [3, 6, 12]
+rolling_std_ddof = 1
+monthly_change = true
+yearly_change = true
+missing_strategy = "fail_with_reason"
+scaling = "none"
+
+[metrics]
+primary_mase_scale = "expanding_fold_asof"
+comparison_mase_scale = "fixed_first_validation_asof"
+aggregation = "equal_origin_horizon_pairs"
+undefined_scale = "null_with_reason"

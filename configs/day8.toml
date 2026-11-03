@@ -1,0 +1,28 @@
+# Frozen before Day 8 solver execution or policy comparison.
+schema_version = 1
+project_root = ".."
+day7_config = "configs/day7.toml"
+day7_config_sha256 = "2a3b95e66ea2aaa48441be994cfb8d4eb79889b380af6308eed529685eb24418"
+day6_run = "artifacts/day6/20261029T014002057377Z"
+day6_manifest_sha256 = "f567e750796ace1ef716704cca1ca1b127e1b797eb04bb2697aecdd63b97872b"
+report_root = "artifacts/day8"
+synthetic_root = "data/synthetic/day8"
+holdout_locked = true
+smoke_origins = ["2021-06", "2024-05"]
+models = ["sarimax_110_10012", "lightgbm_direct"]
+
+[risk]
+alpha = 0.90
+risk_weight = 0.50
+scenario_count = 128
+non_anticipativity = "all_orders_and_physical_flows_shared"
+fallback = "none_abort"
+
+[toy]
+generator = "synthetic_joint_three_atoms_v1_not_world_or_validation"
+seed = 2026103008
+# Deterministic strata, then seed-controlled permutation. Not market estimates.
+atom_counts = [96, 24, 8]
+atom_prices = [[100.0, 100.0, 100.0], [90.0, 120.0, 140.0], [100.0, 200.0, 300.0]]
+initial_inventory = 200.0
+initial_pipeline = "empty"

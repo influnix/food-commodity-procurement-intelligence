@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "food-procurement-intelligence"
+version = "0.1.0"
+description = "Forecasting and procurement decision evaluation for food commodities"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9"]
+models = ["statsmodels==0.14.6", "lightgbm==4.6.0", "patsy==1.0.2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --strict-config --strict-markers"

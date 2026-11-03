@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "evidence_snapshot_id": "20261024T012917500704Z_ea1c35082787",
+  "sheet_states": {
+    "Mismatch Details": "hidden",
+    "Monthly Prices": "visible",
+    "Monthly Indices": "visible",
+    "Description": "visible",
+    "Index Weights": "visible"
+  },
+  "price_sheet": "Monthly Prices",
+  "description_sheet": "Description",
+  "title_cell": "A1",
+  "expected_title": "World Bank Commodity Price Data (The Pink Sheet)",
+  "currency_cells": {
+    "A2": "monthly prices in nominal US dollars, 1960 to present",
+    "A3": "(monthly series are available only in nominal US dollars)"
+  },
+  "header_row": 5,
+  "unit_row": 6,
+  "data_start_row": 7,
+  "date_column": "A",
+  "date_format": "YYYYMmm",
+  "expected_price_columns": [
+    {
+      "column": "B",
+      "source_series": "Crude oil, average",
+      "source_unit": "($/bbl)"
+    },
+    {
+      "column": "C",
+      "source_series": "Crude oil, Brent",
+      "source_unit": "($/bbl)"
+    },
+    {
+      "column": "D",
+      "source_series": "Crude oil, Dubai",
+      "source_unit": "($/bbl)"
+    },
+    {
+      "column": "E",
+      "source_series": "Crude oil, WTI",
+      "source_unit": "($/bbl)"
+    },
+    {
+      "column": "F",
+      "source_series": "Coal, Australian",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "G",
+      "source_series": "Coal, South African **",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "H",
+      "source_series": "Natural gas, US",
+      "source_unit": "($/mmbtu)"
+    },
+    {
+      "column": "I",
+      "source_series": "Natural gas, Europe",
+      "source_unit": "($/mmbtu)"
+    },
+    {
+      "column": "J",
+      "source_series": "Liquefied natural gas, Japan",
+      "source_unit": "($/mmbtu)"
+    },
+    {
+      "column": "K",
+      "source_series": "Natural gas index",
+      "source_unit": "(2010=100)"
+    },
+    {
+      "column": "L",
+      "source_series": "Cocoa",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "M",
+      "source_series": "Coffee, Arabica",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "N",
+      "source_series": "Coffee, Robusta",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "O",
+      "source_series": "Tea, avg 3 auctions",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "P",
+      "source_series": "Tea, Colombo",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "Q",
+      "source_series": "Tea, Kolkata",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "R",
+      "source_series": "Tea, Mombasa",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "S",
+      "source_series": "Coconut oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "T",
+      "source_series": "Groundnuts",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "U",
+      "source_series": "Fish meal",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "V",
+      "source_series": "Groundnut oil **",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "W",
+      "source_series": "Palm oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "X",
+      "source_series": "Palm kernel oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "Y",
+      "source_series": "Soybeans",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "Z",
+      "source_series": "Soybean oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AA",
+      "source_series": "Soybean meal",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AB",
+      "source_series": "Rapeseed oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AC",
+      "source_series": "Sunflower oil",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AD",
+      "source_series": "Barley",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AE",
+      "source_series": "Maize",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AF",
+      "source_series": "Sorghum",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AG",
+      "source_series": "Rice, Thai 5% ",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AH",
+      "source_series": "Rice, Thai 25% ",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AI",
+      "source_series": "Rice, Thai A.1",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AJ",
+      "source_series": "Rice, Viet Namese 5%",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AK",
+      "source_series": "Wheat, US SRW",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AL",
+      "source_series": "Wheat, US HRW",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AM",
+      "source_series": "Banana, Europe",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AN",
+      "source_series": "Banana, US",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AO",
+      "source_series": "Orange",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AP",
+      "source_series": "Beef **",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AQ",
+      "source_series": "Chicken **",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AR",
+      "source_series": "Lamb **",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AS",
+      "source_series": "Shrimps, Mexican",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AT",
+      "source_series": "Sugar, EU",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AU",
+      "source_series": "Sugar, US",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AV",
+      "source_series": "Sugar, world",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "AW",
+      "source_series": "Tobacco, US import u.v.",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "AX",
+      "source_series": "Logs, Cameroon",
+      "source_unit": "($/cubic meter)"
+    },
+    {
+      "column": "AY",
+      "source_series": "Logs, Malaysian",
+      "source_unit": "($/cubic meter)"
+    },
+    {
+      "column": "AZ",
+      "source_series": "Sawnwood, Cameroon",
+      "source_unit": "($/cubic meter)"
+    },
+    {
+      "column": "BA",
+      "source_series": "Sawnwood, Malaysian",
+      "source_unit": "($/cubic meter)"
+    },
+    {
+      "column": "BB",
+      "source_series": "Plywood",
+      "source_unit": "(cents/sheet)"
+    },
+    {
+      "column": "BC",
+      "source_series": "Cotton, A Index",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "BD",
+      "source_series": "Rubber, TSR20 **",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "BE",
+      "source_series": "Rubber, RSS3",
+      "source_unit": "($/kg)"
+    },
+    {
+      "column": "BF",
+      "source_series": "Phosphate rock",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BG",
+      "source_series": "DAP",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BH",
+      "source_series": "TSP",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BI",
+      "source_series": "Urea ",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BJ",
+      "source_series": "Potassium chloride **",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BK",
+      "source_series": "Aluminum",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BL",
+      "source_series": "Iron ore, cfr spot",
+      "source_unit": "($/dmtu)"
+    },
+    {
+      "column": "BM",
+      "source_series": "Copper",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BN",
+      "source_series": "Lead",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BO",
+      "source_series": "Tin",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BP",
+      "source_series": "Nickel",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BQ",
+      "source_series": "Zinc",
+      "source_unit": "($/mt)"
+    },
+    {
+      "column": "BR",
+      "source_series": "Gold",
+      "source_unit": "($/troy oz)"
+    },
+    {
+      "column": "BS",
+      "source_series": "Platinum",
+      "source_unit": "($/troy oz)"
+    },
+    {
+      "column": "BT",
+      "source_series": "Silver",
+      "source_unit": "($/troy oz)"
+    }
+  ],
+  "missing_strings": [
+    "…",
+    "...",
+    ".."
+  ],
+  "series": [
+    {
+      "column": "AK",
+      "source_series": "Wheat, US SRW",
+      "source_unit": "($/mt)",
+      "unit": "USD_per_metric_tonne",
+      "commodity": "wheat",
+      "description_cell": "B49",
+      "description": "Wheat (U.S.), no. 2, soft red winter, export price delivered at the US Gulf port for prompt or 30 days shipment",
+      "provider_cell": "T49",
+      "providers": "Bloomberg Finance L.P.; US Department of Agriculture; World Bank."
+    },
+    {
+      "column": "AL",
+      "source_series": "Wheat, US HRW",
+      "source_unit": "($/mt)",
+      "unit": "USD_per_metric_tonne",
+      "commodity": "wheat",
+      "description_cell": "B48",
+      "description": "Wheat (U.S.), no. 2 hard red winter Gulf export price; June 2020 backwards, no. 1, hard red winter, ordinary protein, export price delivered at the US Gulf port for prompt or 30 days shipment",
+      "provider_cell": "T48",
+      "providers": "Bloomberg Finance L.P.; US Department of Agriculture; World Bank."
+    }
+  ],
+  "evidence_notes": {
+    "Description!B47": "Wheat (Canada), no. 1, Western Red Spring (CWRS), in store, St. Lawrence, export price",
+    "Description!B126": "March 2026: Wheat (US SRW) and Phosphate rock corrected for 2023 and 2024.",
+    "Description!B130": "September 2026: Some minor inconsistencies in grain prices shown in the August release were the result of formatting issues and have since been addressed. Periods where data are unavailable are indicated by \"..\""
+  }
+}

@@ -1,0 +1,52 @@
+# Frozen before either new model's validation predictions were generated.
+schema_version = 1
+project_root = ".."
+day2_config = "configs/day2.toml"
+day3_config = "configs/day3.toml"
+split_config = "configs/splits.toml"
+split_config_sha256 = "209f2a35dea2bc0afc19461b6f780deb61d27b8cf5acaf5a2aaa10e5cd963741"
+baseline_run = "artifacts/day3/20261027T013028732383Z"
+report_root = "artifacts/day4"
+seed = 20261027
+threads = 1
+holdout_locked = true
+fallback = "none"
+hyperparameter_search = false
+
+[sarimax]
+model_name = "sarimax_110_10012"
+order = [1, 1, 0]
+seasonal_order = [1, 0, 0, 12]
+trend = "n"
+enforce_stationarity = true
+enforce_invertibility = true
+method = "lbfgs"
+maxiter = 100
+minimum_history_months = 120
+require_convergence = true
+refit_each_origin = true
+
+[lightgbm]
+model_name = "lightgbm_direct"
+minimum_rows_per_horizon = 120
+num_boost_round = 100
+label_mask = "complete_three_horizon_maturity"
+early_stopping = false
+refit_each_origin = true
+
+[lightgbm.params]
+objective = "regression_l2"
+learning_rate = 0.05
+num_leaves = 7
+max_depth = 3
+min_data_in_leaf = 20
+feature_fraction = 1.0
+bagging_fraction = 1.0
+bagging_freq = 0
+lambda_l2 = 1.0
+seed = 20261027
+data_random_seed = 20261027
+num_threads = 1
+deterministic = true
+force_col_wise = true
+verbosity = -1

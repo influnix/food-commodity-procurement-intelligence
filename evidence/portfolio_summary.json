@@ -1,0 +1,250 @@
+{
+  "actual_holdout_evaluated": false,
+  "day17_historical_test_result": {
+    "not_current_remote_ci": true,
+    "passed": 613,
+    "warnings": 3
+  },
+  "forecast_comparison": [
+    {
+      "baseline_overall_mae_improvement_pct": 0.0,
+      "horizon": "overall",
+      "mae": 100.02962962962962,
+      "mase": 3.2299685467078207,
+      "model": "seasonal_naive_12",
+      "n": 108.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 1.0,
+      "mae": 100.12777777777778,
+      "mase": 3.230396809495506,
+      "model": "seasonal_naive_12",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 2.0,
+      "mae": 100.48888888888888,
+      "mase": 3.245330869297118,
+      "model": "seasonal_naive_12",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 3.0,
+      "mae": 99.47222222222223,
+      "mase": 3.2141779613308383,
+      "model": "seasonal_naive_12",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": 58.13665449354468,
+      "horizon": "overall",
+      "mae": 41.87574946067945,
+      "mase": 1.3623680877323838,
+      "model": "sarimax_110_10012",
+      "n": 108.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 1.0,
+      "mae": 31.93684065435872,
+      "mase": 1.0362141153471256,
+      "model": "sarimax_110_10012",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 2.0,
+      "mae": 43.43045905721103,
+      "mase": 1.4130920308668402,
+      "model": "sarimax_110_10012",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 3.0,
+      "mae": 50.25994867046862,
+      "mase": 1.6377981169831861,
+      "model": "sarimax_110_10012",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": 51.352392939852265,
+      "horizon": "overall",
+      "mae": 48.66202116594333,
+      "mase": 1.5911570939024624,
+      "model": "lightgbm_direct",
+      "n": 108.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 1.0,
+      "mae": 41.902940756438596,
+      "mase": 1.3697161122625627,
+      "model": "lightgbm_direct",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 2.0,
+      "mae": 48.21839732786572,
+      "mase": 1.5777335244432817,
+      "model": "lightgbm_direct",
+      "n": 36.0
+    },
+    {
+      "baseline_overall_mae_improvement_pct": null,
+      "horizon": 3.0,
+      "mae": 55.86472541352569,
+      "mase": 1.8260216450015423,
+      "model": "lightgbm_direct",
+      "n": 36.0
+    }
+  ],
+  "forecast_origin_range": [
+    "2021-06",
+    "2024-05"
+  ],
+  "forecast_origins": 36,
+  "historical_vintage_verified": false,
+  "holdout_locked": true,
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "interpretation": "Validation uses real market prices and synthetic operations; synthetic integration is a separate world; no corporate savings, causal effect or independent Holdout claim.",
+  "kind": "AGGREGATED_VALIDATION_AND_SYNTHETIC_VERIFICATION_NO_PRICE_ROWS",
+  "mvp_acceptance": {
+    "passed": 5,
+    "required": 5
+  },
+  "policy_comparison": [
+    {
+      "average_inventory": 116.3157894736842,
+      "demand_tonnes": 3800.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 1.0,
+      "fulfilled_tonnes": 3800.0,
+      "holding_cost": 13260.0,
+      "months": 38.0,
+      "period": "full",
+      "policy": "fixed",
+      "procurement_cost": 1336441.6800000002,
+      "terminal_cost": 1800.0,
+      "total_cost": 1351501.6800000002,
+      "transport_cost": 0.0,
+      "unmet_cost": 0.0,
+      "unmet_tonnes": 0.0
+    },
+    {
+      "average_inventory": 120.0,
+      "demand_tonnes": 3500.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 1.0,
+      "fulfilled_tonnes": 3500.0,
+      "holding_cost": 12600.0,
+      "months": 35.0,
+      "period": "active",
+      "policy": "fixed",
+      "procurement_cost": 1287791.28,
+      "terminal_cost": 0.0,
+      "total_cost": 1300391.28,
+      "transport_cost": 0.0,
+      "unmet_cost": 0.0,
+      "unmet_tonnes": 0.0
+    },
+    {
+      "average_inventory": 73.33333333333333,
+      "demand_tonnes": 300.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 1.0,
+      "fulfilled_tonnes": 300.0,
+      "holding_cost": 660.0,
+      "months": 3.0,
+      "period": "runoff",
+      "policy": "fixed",
+      "procurement_cost": 48650.40000000001,
+      "terminal_cost": 1800.0,
+      "total_cost": 51110.40000000001,
+      "transport_cost": 0.0,
+      "unmet_cost": 0.0,
+      "unmet_tonnes": 0.0
+    },
+    {
+      "average_inventory": 46.31578947368421,
+      "demand_tonnes": 3800.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 0.9947368421052631,
+      "fulfilled_tonnes": 3780.0,
+      "holding_cost": 5280.0,
+      "months": 38.0,
+      "period": "full",
+      "policy": "fa_sarimax",
+      "procurement_cost": 1328834.1600000001,
+      "terminal_cost": 1800.0,
+      "total_cost": 1365914.1600000001,
+      "transport_cost": 0.0,
+      "unmet_cost": 30000.0,
+      "unmet_tonnes": 20.0
+    },
+    {
+      "average_inventory": 45.142857142857146,
+      "demand_tonnes": 3500.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 1.0,
+      "fulfilled_tonnes": 3500.0,
+      "holding_cost": 4740.0,
+      "months": 35.0,
+      "period": "active",
+      "policy": "fa_sarimax",
+      "procurement_cost": 1257235.9200000002,
+      "terminal_cost": 0.0,
+      "total_cost": 1261975.9200000002,
+      "transport_cost": 0.0,
+      "unmet_cost": 0.0,
+      "unmet_tonnes": 0.0
+    },
+    {
+      "average_inventory": 60.0,
+      "demand_tonnes": 300.0,
+      "disposal_cost": 0.0,
+      "fill_rate": 0.9333333333333333,
+      "fulfilled_tonnes": 280.0,
+      "holding_cost": 540.0,
+      "months": 3.0,
+      "period": "runoff",
+      "policy": "fa_sarimax",
+      "procurement_cost": 71598.24000000002,
+      "terminal_cost": 1800.0,
+      "total_cost": 103938.24000000002,
+      "transport_cost": 0.0,
+      "unmet_cost": 30000.0,
+      "unmet_tonnes": 20.0
+    }
+  ],
+  "real_seed_runtime_status": "NOT_VERIFIED",
+  "schema_version": 1,
+  "source_export_status": "ACCESS_APPROVAL_REQUIRED",
+  "sources": {
+    "artifacts/day13/evidence_a/forecast_comparison.csv": "183f92b187b0101aa8617a081808dd38504dfec2559824e064a03b2bb5b7542b",
+    "artifacts/day13/evidence_a/policy_comparison.csv": "71aa6f8a2ea2991e03534371cebada6aff249ea42c1b6eef93efac2454673b56",
+    "artifacts/day17/independent_verification.json": "a6a8576173c7fb6b4801e633f572827f7fc1687265b4923cd9e0a3ecf669f81c",
+    "artifacts/day17/test_results.json": "917ba97eb8a40689c4c04e003e4fe4255b677b8f33f70398f39493f72df25060"
+  },
+  "synthetic_integration": {
+    "decisions": 154,
+    "deterministic_files_equal": 111,
+    "joint_paths_independently_checked": 5632,
+    "ledger_rows": 168,
+    "optimal_lp": 132,
+    "policies": 7
+  },
+  "unique_validation_target_months": 38,
+  "validation_target_range": [
+    "2021-07",
+    "2024-08"
+  ]
+}

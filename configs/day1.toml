@@ -1,0 +1,19 @@
+schema_version = 1
+stage = "data_acquisition_and_structural_validation_only"
+project_root = ".."
+
+[source]
+landing_url = "https://www.worldbank.org/en/research/commodity-markets"
+download_url = "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx"
+raw_root = "data/raw/world_bank"
+workbook = "data/raw/world_bank/20261024T012917500704Z_ea1c35082787/CMO-Historical-Data-Monthly.xlsx"
+sha256 = "ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154"
+schema = "configs/world_bank_monthly.schema.json"
+
+[extraction]
+selected_source_series = "Wheat, US HRW"
+price_publication_lag_months = 1
+availability_basis = "assumed_observation_month_plus_one_month_end"
+vintage_mode = "latest_vintage_pseudo_real_time"
+processed_root = "data/processed/world_bank"
+report_root = "artifacts/day1"

@@ -1,0 +1,35 @@
+# Frozen before Toy policy costs or actual-forecast plans were inspected.
+schema_version = 1
+project_root = ".."
+day6_config = "configs/day6.toml"
+day6_config_sha256 = "fe12d7be4ea4a7d6944a7c5e8874a5d6c683ac893fcf28cae97de33179d8aea9"
+report_root = "artifacts/day7"
+synthetic_root = "data/synthetic/day7"
+holdout_locked = true
+default_model = "sarimax_110_10012"
+alternate_model = "lightgbm_direct"
+smoke_origins = ["2021-06", "2024-05"]
+sarimax_run = "artifacts/day4/sarimax_20261027T021556181229Z"
+lightgbm_run = "artifacts/day4/lightgbm_20261027T021556175230Z"
+comparison_initial_inventory = 200.0
+comparison_initial_pipeline = "empty"
+toy_forecast_price = 100.0
+toy_forecast_model = "synthetic_flat100_prespecified"
+
+[lp]
+backend = "GLOP"
+ortools_version = "9.14.6206"
+horizon_months = 3
+planned_disposal = "zero_conservative"
+pipeline_overdue_arrival = "next_month_no_future_delay"
+admission_boundary = "planning_end_including_maximum_delay"
+require_optimal = true
+fallback = "none_abort_comparison_on_failure"
+time_limit_ms = 10000
+primal_tolerance = 1e-8
+dual_tolerance = 1e-8
+quantity_tolerance = 1e-7
+objective_absolute_tolerance = 1e-4
+objective_relative_tolerance = 1e-8
+random_seed = 20261029
+use_dual_simplex = true
