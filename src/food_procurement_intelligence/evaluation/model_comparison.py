@@ -107,7 +107,7 @@ def run_comparison(config_path: Path, phases: list[Path]) -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=Path("configs/day4.toml"))
+    parser.add_argument("--config", type=Path, default=Path("configs/forecasting/models.toml"))
     parser.add_argument("--phases", nargs="+", type=Path, required=True)
     args = parser.parse_args()
     print(json.dumps(run_comparison(args.config, args.phases), indent=2))

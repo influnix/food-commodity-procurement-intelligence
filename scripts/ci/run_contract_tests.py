@@ -1,4 +1,9 @@
 """Offline allowlisted tests; deny checkout data/artifact reads and network."""
+
+import sys as _bootstrap_sys
+from pathlib import Path as _BootstrapPath
+_bootstrap_root = next(p for p in _BootstrapPath(__file__).resolve().parents if (p / 'pyproject.toml').is_file())
+_bootstrap_sys.path.insert(0, str(_bootstrap_root))
 from contextlib import ExitStack
 import builtins
 import io
@@ -10,15 +15,16 @@ import sys
 import tomllib
 from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'pyproject.toml').is_file())
 
 
-def main() -> int:
+def main(suite: str = 'contracts') -> int:
     sys.dont_write_bytecode = True
     # Pytest entry-point autoload can import unrelated globally installed plugins.
     os.environ['PYTEST_DISABLE_PLUGIN_AUTOLOAD'] = '1'
     import pytest
-    files = tomllib.loads((ROOT / 'configs/ci.toml').read_text(encoding='utf-8'))['tests']
+    config = tomllib.loads((ROOT / 'configs/evaluation/ci.toml').read_text(encoding='utf-8'))
+    files = config['tests' if suite == 'contracts' else 'synthetic_tests']
     protected = tuple((ROOT / name).resolve() for name in ('data', 'artifacts'))
     audit = {'data_or_artifact_opens': 0, 'blocked_attempts': 0, 'network_attempts': 0}
 
@@ -45,7 +51,7 @@ def main() -> int:
         stack.enter_context(patch.object(socket, 'create_connection', offline))
         stack.enter_context(patch.object(socket.socket, 'connect', offline))
         status = int(pytest.main([*files, '-q', '-p', 'no:cacheprovider', '--junitxml=ci-results.junit.xml']))
-    print(json.dumps({'ci_scope': 'offline_toy_and_contract', 'exit_code': status, 'access': audit}))
+    print(json.dumps({'ci_scope': suite, 'exit_code': status, 'access': audit}))
     return status or (1 if audit['blocked_attempts'] or audit['network_attempts'] else 0)
 
 

@@ -1,0 +1,21 @@
+schema_version = 1
+scope = "offline_toy_and_contract_only_no_source_no_local_evidence"
+tests = [
+  "tests/unit/test_source_parser.py",
+  "tests/safety/test_temporal_availability.py",
+  "tests/unit/test_features_and_baseline.py",
+  "tests/unit/test_forecasting_models.py",
+  "tests/unit/test_uncertainty.py",
+  "tests/integration/test_scenarios_and_inventory.py",
+  "tests/unit/test_deterministic_optimization.py",
+  "tests/unit/test_risk_optimization.py",
+  "tests/integration/test_policy_backtest.py",
+  "tests/regression/test_operating_sensitivity.py",
+  "tests/safety/test_release_contents.py",
+]
+synthetic_tests = [
+  "tests/integration/test_policy_backtest.py::test_seven_policy_factory_same_scenario_and_full_toy_replay",
+  "tests/integration/test_policy_backtest.py::test_optimized_history_decisions_invariant_before_future_price_demand_delay",
+  "tests/unit/test_risk_optimization.py::test_lambda_zero_equals_deterministic_mean_and_lambda_one_direct_tail",
+  "tests/unit/test_risk_optimization.py::test_non_anticipativity_blocks_cheap_perfect_foresight_current_orders",
+]

@@ -13,7 +13,7 @@ from food_procurement_intelligence.evaluation.splits import (
 )
 from food_procurement_intelligence.evaluation.policy_inputs import PreparedPolicyInputs, make_policy, record_hash
 from food_procurement_intelligence.evaluation.policy_backtest import run_historical_policy, period_metrics
-from food_procurement_intelligence.evaluation.day9 import POLICIES
+from food_procurement_intelligence.evaluation.historical_backtest import POLICIES
 from food_procurement_intelligence.features.price import FeatureSpec
 from food_procurement_intelligence.forecasting.common import ModelPrediction
 from food_procurement_intelligence.forecasting.sarimax import fit_predict as sarimax_predict

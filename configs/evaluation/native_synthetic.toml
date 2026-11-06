@@ -1,0 +1,22 @@
+# Day12 native integration only. Source readers and real unlock remain disabled.
+schema_version = 1
+report_root = "artifacts/day12"
+synthetic_root = "data/synthetic/day12"
+holdout_locked = true
+real_execution_enabled = false
+preflight_baseline = "artifacts/day11/run_20261030T141429269521Z/final_freeze_manifest.json"
+preflight_baseline_sha256 = "163a74d3387743b882651e98fa434d1cc4113d3e5eac98e3fde08e53e24b78be"
+first_origin = "2024-09"
+last_origin = "2026-06"
+last_ledger = "2026-09"
+fixture_start = "2000-01"
+fixture_seed = 20261030
+fixture_rule = "level200; d=.1+.35*d[-1]+.25*d[-12]-.0875*d[-13]+Normal(0,1.5); level+=d; missing prehistory increments0"
+fixture_knowledge_type = "synthetic_day12_not_world_bank"
+native_backend_only = true
+publication_maturity_utc = "2026-10-31T23:59:59+00:00"
+initial_pool = "historical60_and_validation36_calendar; synthetic chronological native issuance; real saved Day5 seed import disabled today"
+unissued_origins = ["2024-06", "2024-07", "2024-08"]
+release_rule = "complete_h1_h2_h3_and_o+3<=t-1_and_all_actual_available_at<=decision_at(t)"
+failure_policy = "abort_no_fallback_no_full_comparison_if_incomplete"
+deterministic_price_tolerance = 0.00000001

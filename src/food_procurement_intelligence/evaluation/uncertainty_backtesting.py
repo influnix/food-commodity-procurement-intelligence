@@ -23,15 +23,15 @@ from food_procurement_intelligence.uncertainty.models import sarimax_intervals, 
 from .uncertainty_metrics import score_predictions, summarize_uncertainty
 
 
-def load_day5_context(path: Path):
+def load_uncertainty_context(path: Path):
     config = tomllib.loads(path.read_text(encoding="utf-8"))
     root = (path.resolve().parent / config["project_root"]).resolve()
-    for key in ("day4_config", "sarimax_point_run", "lightgbm_point_run", "report_root"):
+    for key in ("model_config", "sarimax_point_run", "lightgbm_point_run", "report_root"):
         if not (root / config[key]).resolve().is_relative_to(root):
             raise ValueError("Day 5 path escapes project")
-    if digest(root / config["day4_config"]) != config["day4_config_sha256"]:
+    if digest(root / config["model_config"]) != config["model_config_sha256"]:
         raise ValueError("Day 4 specification changed")
-    _, d4, plan, spec = load_context(root / config["day4_config"])
+    _, d4, plan, spec = load_context(root / config["model_config"])
     frozen = {"schema_version": 1, "holdout_locked": True, "quantiles": [.1, .5, .9], "nominal_coverage": .8,
               "historical_origins": 60, "calibration_window": 60, "minimum_calibration_samples": 24,
               "calibration_score": "max(lower_minus_actual,actual_minus_upper,0)",
@@ -54,7 +54,7 @@ def point_links(root, config, d4) -> tuple[dict, dict]:
     for model in ("sarimax", "lightgbm"):
         directory = root / config[model + "_point_run"]
         manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
-        if manifest["config_sha256"] != config["day4_config_sha256"] or manifest["model"] != model:
+        if manifest["config_sha256"] != config["model_config_sha256"] or manifest["model"] != model:
             raise ValueError("Wrong Day 4 point artifact")
         for filename, expected in manifest["output_sha256"].items():
             if digest(directory / filename) != expected:
@@ -175,14 +175,14 @@ def evaluate_uncertainty(store, plan, generated):
     return rows, summarize_uncertainty(rows, expected)
 
 
-def run_day5(path: Path) -> dict:
-    root, config, d4, plan, spec = load_day5_context(path)
+def run_uncertainty_backtest(path: Path) -> dict:
+    root, config, d4, plan, spec = load_uncertainty_context(path)
     points, links = point_links(root, config, d4)
     directory = root / config["report_root"] / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     directory.mkdir(parents=True, exist_ok=False)
     save_json(directory / "spec_freeze.json", {"created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "config": config, "day4_config": d4, "config_sha256": digest(path), "fit_started": False})
-    store = load_development_store(root, root / d4["day2_config"])
+        "config": config, "model_config": d4, "config_sha256": digest(path), "fit_started": False})
+    store = load_development_store(root, root / d4["data_config"])
     started = perf_counter()
     generated = generate_uncertainty(store, plan, spec, d4, config, points,
                                      progress=lambda item: print(json.dumps(item), flush=True))
@@ -212,9 +212,9 @@ def run_day5(path: Path) -> dict:
     package = root / "src/food_procurement_intelligence"
     sources = list((package / "uncertainty").glob("*.py")) + [Path(__file__), Path(__file__).with_name("uncertainty_metrics.py")]
     save_json(directory / "manifest.json", {"created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "config": config, "config_sha256": digest(path), "day4_config_sha256": digest(root / config["day4_config"]),
+        "config": config, "config_sha256": digest(path), "model_config_sha256": digest(root / config["model_config"]),
         "split_sha256": digest(root / d4["split_config"]), "point_links": links,
-        "day2_input_config_sha256": digest(root / d4["day2_config"]),
+        "day2_input_config_sha256": digest(root / d4["data_config"]),
         "source_data": json.loads((root / config["sarimax_point_run"] / "manifest.json").read_text(encoding="utf-8"))["processed_input"],
         "raw_sha256": json.loads((root / config["sarimax_point_run"] / "manifest.json").read_text(encoding="utf-8"))["raw_sha256"],
         "python": sys.version, "library_versions": {p: version(p) for p in ("statsmodels", "lightgbm", "numpy", "scipy", "pandas")},
@@ -230,6 +230,6 @@ def run_day5(path: Path) -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=Path("configs/day5.toml"))
+    parser.add_argument("--config", type=Path, default=Path("configs/scenarios/calibration.toml"))
     args = parser.parse_args()
-    print(json.dumps(run_day5(args.config), indent=2))
+    print(json.dumps(run_uncertainty_backtest(args.config), indent=2))

@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 
 from food_procurement_intelligence.data.sequential import canonical_hash
-from food_procurement_intelligence.evaluation.day6 import _serializable
+from food_procurement_intelligence.evaluation.scenario_diagnostics import _serializable
 from food_procurement_intelligence.evaluation.splits import ForecastSample,LeakageError,add_months,decision_at,eligible_training_samples
 from food_procurement_intelligence.features.price import FeatureSpec
 from food_procurement_intelligence.forecasting.common import ModelPrediction

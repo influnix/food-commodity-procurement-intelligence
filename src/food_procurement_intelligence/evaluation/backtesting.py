@@ -140,12 +140,12 @@ def run_experiment(config_path: Path) -> dict:
             raise ValueError("Config path escapes project root")
         return result
 
-    split_path, day2_path = local(config["split_config"]), local(config["day2_config"])
-    if _sha256(split_path) != config["split_config_sha256"] or _sha256(day2_path) != config["day2_config_sha256"]:
+    split_path, day2_path = local(config["split_config"]), local(config["data_config"])
+    if _sha256(split_path) != config["split_config_sha256"] or _sha256(day2_path) != config["data_config_sha256"]:
         raise ValueError("Frozen Day 2 config/split hash changed")
     plan, _ = load_split_plans(split_path)
-    day2_config = tomllib.loads(day2_path.read_text(encoding="utf-8"))
-    if local(day2_config["split_config"]) != split_path:
+    data_config = tomllib.loads(day2_path.read_text(encoding="utf-8"))
+    if local(data_config["split_config"]) != split_path:
         raise ValueError("Day 2 loader and Day 3 must use exactly the same split file")
     feature_config = dict(config["features"])
     feature_config["lags"], feature_config["rolling_windows"] = tuple(feature_config["lags"]), tuple(feature_config["rolling_windows"])
@@ -177,7 +177,7 @@ def run_experiment(config_path: Path) -> dict:
     save_json("feature_provenance.json", [vector.provenance() for vector in result.feature_vectors])
     save_json("metrics.json", result.metrics)
     save_json("failures.json", result.failures)
-    source_manifest_path = local(day2_config["day1_manifest"])
+    source_manifest_path = local(data_config["source_manifest"])
     source_manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
     package_root = Path(__file__).resolve().parents[1]
     code_files = [
@@ -190,8 +190,8 @@ def run_experiment(config_path: Path) -> dict:
         "created_at_utc": now.isoformat(), "python_version": sys.version,
         "stage": "day3_validation_seasonal_naive_only", "config_copy": config,
         "config_sha256": _sha256(config_path), "split_config_sha256": _sha256(split_path),
-        "day2_config_sha256": _sha256(day2_path), "split_plan": asdict(plan),
-        "day1_manifest_sha256": _sha256(source_manifest_path),
+        "data_config_sha256": _sha256(day2_path), "split_plan": asdict(plan),
+        "source_manifest_sha256": _sha256(source_manifest_path),
         "raw_snapshot_id": source_manifest["raw_snapshot_id"], "raw_sha256": source_manifest["raw_sha256"],
         "selected_processed_input": source_manifest["outputs"][source_manifest["selected_source_series"]],
         "code_sha256": {path.relative_to(package_root).as_posix(): _sha256(path) for path in code_files},

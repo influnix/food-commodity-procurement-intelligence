@@ -67,7 +67,7 @@ def _verified_records(root: Path, manifest_path: Path, expected_hash: str) -> tu
             raise ValueError("Raw/processed values or provenance differ; price values redacted")
     return records, {
         "raw_sha256": raw_hash, "processed_sha256": _sha256(csv_path),
-        "day1_manifest_sha256": expected_hash, "raw_processed_rows_matched": len(records),
+        "source_manifest_sha256": expected_hash, "raw_processed_rows_matched": len(records),
         "raw_processed_all_fields_match": True, "snapshot_id": acquisition["snapshot_id"],
         "nominal_currency_statements_match": True, "unit_identity_conversion_verified": True,
         "reviewed_definition_and_revision_notes_match": True,
@@ -139,16 +139,16 @@ def audit_records(records: list[PriceObservation], plan: SplitPlan, threshold: f
     }
 
 
-def load_development_store(root: Path, day2_config_path: Path) -> DevelopmentPriceStore:
+def load_development_store(root: Path, data_config_path: Path) -> DevelopmentPriceStore:
     """A price-bearing API for later validation work, with no holdout access."""
-    with day2_config_path.open("rb") as file:
+    with data_config_path.open("rb") as file:
         config = tomllib.load(file)
     plan, _ = load_split_plans(_local(root, config["split_config"]))
-    records, _ = _verified_records(root, _local(root, config["day1_manifest"]), config["day1_manifest_sha256"])
+    records, _ = _verified_records(root, _local(root, config["source_manifest"]), config["source_manifest_sha256"])
     return DevelopmentPriceStore(records, plan)
 
 
-def run_day2(config_path: Path) -> dict:
+def run_data_audit(config_path: Path) -> dict:
     config_path = config_path.resolve()
     with config_path.open("rb") as file:
         config = tomllib.load(file)
@@ -176,7 +176,7 @@ def run_day2(config_path: Path) -> dict:
         "selection_used_prices_or_model_scores": False,
         "note": "Retrospective date-only freeze, not a historical 2024 preregistration or final model/policy lock",
     })
-    records, integrity = _verified_records(root, _local(root, config["day1_manifest"]), config["day1_manifest_sha256"])
+    records, integrity = _verified_records(root, _local(root, config["source_manifest"]), config["source_manifest_sha256"])
     if tuple(record.date for record in records) != calendar:
         raise ValueError("Actual calendar differs from frozen metadata calendar")
     audit = audit_records(records, plan, config["development_absolute_monthly_change_threshold"])
@@ -192,7 +192,7 @@ def run_day2(config_path: Path) -> dict:
     package_root = Path(__file__).resolve().parents[1]
     save("run_manifest.json", {
         "created_at_utc": now.isoformat(), "stage": "day2_audit_split_only", "python_version": sys.version,
-        "day2_config_sha256": _sha256(config_path), "split_config_sha256": _sha256(split_path),
+        "data_config_sha256": _sha256(config_path), "split_config_sha256": _sha256(split_path),
         "source_code_sha256": {
             "food_procurement_intelligence/" + path.relative_to(package_root).as_posix(): _sha256(path)
             for path in (
@@ -218,4 +218,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True, type=Path)
     args = parser.parse_args()
-    print(json.dumps(run_day2(args.config), ensure_ascii=False, indent=2))
+    print(json.dumps(run_data_audit(args.config), ensure_ascii=False, indent=2))

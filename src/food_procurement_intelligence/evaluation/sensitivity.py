@@ -8,8 +8,8 @@ import math
 from pathlib import Path
 
 from food_procurement_intelligence.data.audit import load_development_store
-from food_procurement_intelligence.evaluation.day6 import _serializable
-from food_procurement_intelligence.evaluation.day9 import load_day9, POLICIES, PAIRS
+from food_procurement_intelligence.evaluation.scenario_diagnostics import _serializable
+from food_procurement_intelligence.evaluation.historical_backtest import load_historical_context, POLICIES, PAIRS
 from food_procurement_intelligence.evaluation.historical_prices import GuardedValidationPrices, HistoricalEvaluationWorld
 from food_procurement_intelligence.evaluation.model_backtesting import digest, save_csv, save_json
 from food_procurement_intelligence.evaluation.policy_backtest import run_historical_policy, period_metrics, paired_comparison, COST_KEYS
@@ -32,12 +32,12 @@ def read_gzip(path: Path):
 
 
 def prepare_resources(root: Path, cache: Path | None = None) -> dict:
-    _,d9,plan,d8,d7,d6=load_day9(root/'configs/day9.toml')
+    _,d9,plan,d8,d7,d6=load_historical_context(root/'configs/evaluation/validation.toml')
     origins=months_between(plan.validation_origin_start,plan.validation_origin_end)
     models={'sarimax':d8['models'][0],'lightgbm':d8['models'][1]}
     if cache is None:
         points={label:load_point_adapter(root/d7[label+'_run'],plan,model) for label,model in models.items()}
-        scenario=SavedPlanningScenarios(root/d8['day6_run'],root,plan,d8['day6_manifest_sha256'])
+        scenario=SavedPlanningScenarios(root/d8['scenario_run'],root,plan,d8['scenario_manifest_sha256'])
         inputs=PreparedPolicyInputs(origins,models,points,scenario)
     else:
         data=read_gzip(cache)
@@ -50,7 +50,7 @@ def prepare_resources(root: Path, cache: Path | None = None) -> dict:
         inputs=PreparedPolicyInputs(origins,models,{label:(lambda o,label=label:pmap[(label,o)]) for label in models},lambda o,m:bmap[(m,o)])
     settings=SimulationSettings(**{k:d6['simulation'][k] for k in SimulationSettings.__dataclass_fields__})
     suppliers=tuple(Supplier(**r) for r in d6['suppliers'])
-    store=load_development_store(root,root/'configs/day2.toml')
+    store=load_development_store(root,root/'configs/data/quality.toml')
     reader=GuardedValidationPrices(store.validation_actuals_reader(),plan)
     prices=reader.frozen_path()
     world=HistoricalEvaluationWorld(d9['operations']['world_id'],plan.validation_target_start,plan.validation_target_end,

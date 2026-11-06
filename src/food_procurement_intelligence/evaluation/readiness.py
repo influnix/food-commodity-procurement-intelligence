@@ -6,7 +6,7 @@ from pathlib import Path
 import tomllib
 
 from food_procurement_intelligence.data.sequential import integration_source_guard
-from food_procurement_intelligence.evaluation.day11 import save
+from food_procurement_intelligence.evaluation.preflight_runner import save
 from food_procurement_intelligence.evaluation.release_gate import REQUIRED_CHECKS,file_digest,preservation_check,release_status
 
 
@@ -25,7 +25,7 @@ def verify_candidate(path: Path,expected_sha256: str,root: Path) -> dict:
     if not path.is_file() or file_digest(path)!=expected_sha256:return blocked('candidate_digest_changed_or_old_approval')
     try:
         value=json.loads(path.read_text(encoding='utf-8'))
-        if any(not value.get(k) for k in ('contract_files','code_files','metadata_files','release_gate','day11_baseline_sha256','readiness')):
+        if any(not value.get(k) for k in ('contract_files','code_files','metadata_files','release_gate','preflight_baseline_sha256','readiness')):
             return blocked('incomplete_candidate')
         for group in ('contract_files','code_files','metadata_files'):
             for name,digest in value[group].items():
@@ -49,9 +49,9 @@ def verify_candidate(path: Path,expected_sha256: str,root: Path) -> dict:
 def freeze_candidate(root: Path,run: Path,repeat: Path) -> dict:
     with integration_source_guard(root) as access:
         load=lambda p:json.loads(p.read_text(encoding='utf-8'))
-        c=tomllib.loads((root/'configs/day12.toml').read_text(encoding='utf-8'))
-        baseline=load(root/'artifacts/day12/day11_baseline_integrity.json')
-        if not baseline['passed'] or file_digest(root/c['day11_baseline'])!=c['day11_baseline_sha256']:raise ValueError('Day11 baseline changed')
+        c=tomllib.loads((root/'configs/evaluation/native_synthetic.toml').read_text(encoding='utf-8'))
+        baseline=load(root/'artifacts/day12/preflight_baseline_integrity.json')
+        if not baseline['passed'] or file_digest(root/c['preflight_baseline'])!=c['preflight_baseline_sha256']:raise ValueError('Day11 baseline changed')
         preserved=preservation_check(root,load(root/'artifacts/day12/preservation_before.json'))
         for directory in (run,repeat):
             manifest=load(directory/'run_manifest.json')
@@ -75,16 +75,16 @@ def freeze_candidate(root: Path,run: Path,repeat: Path) -> dict:
             *sorted((root/'requirements').glob('*-lock.txt')),root/'AGENTS.md',root/'pyproject.toml',
             *[root/'docs'/n for n in ('DAY11_PRE_HOLDOUT_PROTOCOL.md','DAY11_LIMITATIONS.md','DAY12_PRODUCTION_INTEGRATION.md','DAY12_RELEASE_READINESS.md')]]
         code=[*sorted((root/'src').rglob('*.py')),*sorted((root/'tests').glob('test_*.py')),
-            root/'scripts/run_day12_tests.py',root/'scripts/verify_day12_results.py',root/'scripts/freeze_day12.py']
-        metadata=[root/'artifacts/day12'/n for n in ('day11_baseline_integrity.json','preservation_before.json',*evidence)]
-        metadata.extend([run/'run_manifest.json',repeat/'run_manifest.json',root/c['day11_baseline'],root/'docs/WORLD_BANK_SOURCE.md'])
+            root/'scripts/compatibility/run_native_archive_tests.py',root/'scripts/validation/verify_native_integration.py',root/'scripts/compatibility/freeze_native_candidate.py']
+        metadata=[root/'artifacts/day12'/n for n in ('preflight_baseline_integrity.json','preservation_before.json',*evidence)]
+        metadata.extend([run/'run_manifest.json',repeat/'run_manifest.json',root/c['preflight_baseline'],root/'docs/DATA_AND_ASOF_CONTRACT.md'])
         # Pin every non-price run artifact; own synthetic prices remain in separate immutable manifests.
         metadata.extend(p for directory in (run,repeat) for p in sorted(directory.rglob('*')) if p.is_file() and 'timing' not in p.name)
         shared_before=load(root/'artifacts/day12/preservation_before.json')['append_only']
         changes=[{'path':n,'old_sha256':v['sha256'],'current_sha256':file_digest(root/n),'change':'append Day12 documentation only'} for n,v in shared_before.items()]
-        prior=load(root/c['day11_baseline'])
+        prior=load(root/c['preflight_baseline'])
         value={'schema_version':1,'created_at_utc':datetime.now(timezone.utc).isoformat(),
-            'day11_baseline_sha256':c['day11_baseline_sha256'],'release_gate':gate,'readiness':boundary,
+            'preflight_baseline_sha256':c['preflight_baseline_sha256'],'release_gate':gate,'readiness':boundary,
             'contract_files':{p.relative_to(root).as_posix():file_digest(p) for p in contract},
             'code_files':{p.relative_to(root).as_posix():file_digest(p) for p in code},
             'metadata_files':{p.relative_to(root).as_posix():file_digest(p) for p in metadata},
@@ -93,10 +93,10 @@ def freeze_candidate(root: Path,run: Path,repeat: Path) -> dict:
             'source_metadata':prior['source_metadata'],'preservation':preserved,'append_only_changes':changes,
             'config':c,'actual_source_access':access,'native_backend_evidence':evidence,
             'approval_binding':'Only this new external digest can identify the candidate. No approval exists; real execution stays disabled.',
-            'statistical_limitations':'docs/DAY11_LIMITATIONS.md; synthetic integration does not establish forecasting accuracy or market risk coverage'}
+            'statistical_limitations':'docs/LIMITATIONS_AND_FUTURE_WORK.md; synthetic integration does not establish forecasting accuracy or market risk coverage'}
         name='candidate_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
         path=root/'artifacts/day12'/(name+'.json');save(path,value);digest=file_digest(path)
-        if verify_candidate(path,c['day11_baseline_sha256'],root)['status']!='BLOCKED':raise AssertionError('Old approval unexpectedly accepted')
+        if verify_candidate(path,c['preflight_baseline_sha256'],root)['status']!='BLOCKED':raise AssertionError('Old approval unexpectedly accepted')
         if verify_candidate(path,digest,root)['status']!='READY':raise AssertionError('Candidate integrity failed')
         save(root/'artifacts/day12/candidate_pointer.json',{'path':path.relative_to(root).as_posix(),'sha256':digest,'readiness':boundary})
         return {'candidate':path.relative_to(root).as_posix(),'sha256':digest,'readiness':boundary}

@@ -1,0 +1,17 @@
+schema_version = 1
+report_root = "artifacts/day16"
+holdout_locked = true
+real_execution_enabled = false
+prior_candidate = "artifacts/day15/candidate_20261031T120555404283Z.json"
+prior_candidate_sha256 = "3f2fd62bcd9513aaa6e2a7ca75482dab8e6849807fa46ff389f8a70cd2be6c13"
+saved_nonholdout_seed = "artifacts/day5/20261029T004616487272Z"
+publication_maturity_utc = "2026-10-31T23:59:59+00:00"
+actual_execution_command_available = false
+final_entrypoint = "food_procurement_intelligence.evaluation.final_contract.prepare_final_synthetic_stream"
+source_access_scope = "A_metadata_B_pinned_saved_nonholdout_only; deny_all_data_directory_opens"
+
+[intentional_changes]
+"README.md" = "Append final portfolio completion and pending research evaluation handoff; preserve original prefix"
+"src/food_procurement_intelligence/evaluation/sequential_runner.py" = "Optional explicit lifecycle/publisher factories; preserve legacy defaults; final wrapper always selects Day15 adapter"
+"tests/regression/test_methodology_audit.py" = "Verify archived Day13 README prefix instead of claiming old full-file pin survived append"
+"tests/regression/test_calibration_replay.py" = "Verify Day15 historical change ledger against Day16 pre-change snapshot; subsequent approved changes tracked separately"

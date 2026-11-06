@@ -1,0 +1,1004 @@
+{
+  "documents": [
+    {
+      "source": "docs/ARCHITECTURE_OVERVIEW.md",
+      "source_sha256": "a03983e8b49914eb95dc1a7f9b32e7eadb82ba33d3e3c64c23e8b06da4aa1d8b",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/SYSTEM_ARCHITECTURE.md"
+      ],
+      "source_sections": [
+        "# Architecture Overview"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DATA_AUDIT.md",
+      "source_sha256": "ee9c42f03cfabeb57f7cbdec6341e3e1c22349dbea994f9452066dc094c3e325",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# Day 2 데이터 감사",
+        "## 원본·추출물 무결성",
+        "## 관측 기간별 가용성",
+        "## 급격한 월별 변동: 개발 구간만",
+        "## 2020-07 가격 정의 변경",
+        "## 수정·버전 위험",
+        "## 산출물과 다음 단계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DATA_DICTIONARY.md",
+      "source_sha256": "287cbeba1000261f6cf4523f1111b55d772a19efdc1b52d005d162467b53ff2a",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# 데이터 사전 및 출처 상태",
+        "## 원천과 확인 범위",
+        "## Day 1 CSV: 현재 구현된 가격 관측표",
+        "## 실제 자료",
+        "### Source snapshot manifest",
+        "### 통합 Price observations: Day 2 이후 확장할 설계",
+        "### Weather observations (MVP 기본 비활성)",
+        "## 예측 및 의사결정 입력",
+        "### Day 2 sample calendar: 현재 구현된 날짜 metadata",
+        "### Day 3 Validation 특징·점예측: 현재 구현",
+        "### 통합 Forecasts: 추가 모델·quantile용 예정 스키마",
+        "### Demand beliefs와 policy context",
+        "## 가상 자료와 거래 ledger",
+        "## 실행 manifest",
+        "## Day 5 별도 불확실성 계약",
+        "## Day 6 공동 경로·가상 거래 계약",
+        "## Day 7 계획과 확정 발주"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY10_SENSITIVITY_PROTOCOL.md",
+      "source_sha256": "c86689b78b8b4456865c6046eb61d9c1d9d958e16a16f7e8f6b84ddc3b1371ca",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/VALIDATION_RESULTS.md"
+      ],
+      "source_sections": [
+        "# Day 10 셀별 결과 계산 전 사양 고정",
+        "## 선행 Baseline Gate",
+        "## 달력·정보·공통 입력",
+        "## 전체 셀 목록",
+        "## 지원 범위 감사",
+        "## 지표·순위·비교 방향",
+        "## 실패·압축·재현"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY10_STATUS.md",
+      "source_sha256": "cb98cadf130eeeb8fa4c76cdc9e656423ccb24dddb3e257f13d5373c0d125899",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/VALIDATION_RESULTS.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 10 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. 결과 계산 전 고정과 Hash",
+        "## 3. Day9 Baseline Gate",
+        "## 4. 전체 셀과 완료 현황",
+        "## 5. 초기재고100/300t",
+        "## 6. 부족비·보관비",
+        "## 7. 말기계수0/30",
+        "## 8. B capacity60",
+        "## 9. 공통 수요·납기 Stress",
+        "## 10. 전체 Cost/Fill 비교",
+        "## 11. 순위와 Near-Tie",
+        "## 12. 같은 Scenario의 RA−RN 추가 효과",
+        "## 13. SARIMAX와LightGBM",
+        "## 14. Active / Runoff / Terminal",
+        "## 15. Horizon / Publication Lag 감사",
+        "## 16. 실패·Solver·계약·정보",
+        "## 17. pytest",
+        "## 18. 독립 검산·재현·보존",
+        "## 19. 경제적·통계적 한계와 답",
+        "## 20. Day 11 후속 과제 — 미실행",
+        "## 부록 — 전체 셀 비용 및 위험 목적 차이"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY11_LIMITATIONS.md",
+      "source_sha256": "e9a3f8e0b52f514fce129dd58a1ce2db88baf117ea1012b8c4e3ff5aaf449fb1",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/LIMITATIONS_AND_FUTURE_WORK.md"
+      ],
+      "source_sections": [
+        "# 최종 과학적·경제적 한계 감사"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY11_PRE_HOLDOUT_PROTOCOL.md",
+      "source_sha256": "7c149bfd61a19cad82af6a5360f81d93934877d64849aa3c3fe0edfcb1db080d",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PRODUCT_OVERVIEW.md"
+      ],
+      "source_sections": [
+        "# Day 11 최종 평가 계약 — 실제 실행 잠금 유지",
+        "## 선택과 사후 진단의 구분",
+        "## 달력과 7정책",
+        "## 정보·Bridge·순차 학습",
+        "## Rolling Refit·OOF·보정·시나리오",
+        "## 운영·경제적 회계",
+        "## 지표·비교·실패",
+        "## Synthetic Preflight와 실제 준비도의 구분",
+        "## 동결·변경·승인"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY11_RELEASE_GATE.md",
+      "source_sha256": "a054e77e6c3c326f25b965b97312d1801b86d6934062e132317412acda59569d",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 11 Release Gate",
+        "## 상태 판정",
+        "## 필수 증거",
+        "## 해시와 변경",
+        "## 실제 실행 전에 필요한 작업"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY11_STATUS.md",
+      "source_sha256": "db60bd8176dc17b697bc337221e47b573b3a7cb935516f1cfa55491a6ae5faaf",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 11 실행 결과 — Pre-Holdout Audit & Freeze",
+        "## 1. 생성·수정 파일",
+        "## 2. 전체 파이프라인 감사",
+        "## 3. Final Evaluation Protocol",
+        "## 4. Holdout 달력",
+        "## 5. Bridge·공표 규칙",
+        "## 6. Rolling Refit",
+        "## 7. OOF·보정·공동 시나리오",
+        "## 8. 7정책·지표",
+        "## 9. 초기조건·말기",
+        "## 10. Synthetic Preflight",
+        "## 11~12. Gate와 미해결 사항",
+        "## 13. Freeze",
+        "## 14. pytest",
+        "## 15. 독립 검산·반복 재현",
+        "## 16. Day0~10 보존",
+        "## 17. 해석 한계",
+        "## 18~19. 승인과 다음 범위"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY12_PRODUCTION_INTEGRATION.md",
+      "source_sha256": "e0f6eca6820ab0879bfdc648b250e58724d2bf41c0a96648ecea6411ac40ac49",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/SYSTEM_ARCHITECTURE.md"
+      ],
+      "source_sections": [
+        "# Day12 Production Integration 계약",
+        "## 기준선과 변경 범위",
+        "## 5개 연결 문제",
+        "## 세션·공표·Bridge",
+        "## 합성 fixture와 native 추정",
+        "## 초기 pool·순차 OOF·기존 규칙과의 차이",
+        "## 실행·회계·실패",
+        "## 보안·해석 범위"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY12_RELEASE_READINESS.md",
+      "source_sha256": "a6d47d80ad0a19fff2bd52189b60e68e8dc5b4e1cad052bc8377ebf88e1bb259",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day12 Release Readiness"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY12_STATUS.md",
+      "source_sha256": "ac4cc2476c8b4b9e0f9c058ce4ba639c3285522934be0465b6bebd4f714968bd",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day12 실행 결과 — Production Integration",
+        "## 1. 생성·수정 파일",
+        "## 2. Day11 정본 무결성",
+        "## 3. 다섯 Gap",
+        "## 4. Sequential Store·Bridge",
+        "## 5~6. 실제 Native Fit",
+        "## 7. 발행·저장",
+        "## 8. OOF·Calibration",
+        "## 9. Joint Scenario",
+        "## 10~11. Calendar Runner·7정책",
+        "## 12. Day0~11 회귀",
+        "## 13~14. 접근 차단·pytest",
+        "## 15. 독립 검산·재현성",
+        "## 16~17. Release Gate·Candidate",
+        "## 18~19. 공표와 실제 승인",
+        "## 20~21. 한계·다음 승인 조건"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY14_METHOD_CONSISTENCY.md",
+      "source_sha256": "07225527b784609bd7fdf539602c822581830e07a1b63444059e0b3a749197df",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md"
+      ],
+      "source_sections": [
+        "# Day14 방법론 정합성 감사",
+        "## 계약 우선순위와 판단",
+        "## 코드 수준 차이 표",
+        "## 합성 반례",
+        "## Crossing·Invalid·Fallback 감사",
+        "## OOF·Seed·Native 발행 출처",
+        "## 최종7정책에 미치는 영향",
+        "## Methodological Decision Record — 제안만"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY15_CHANGELOG.md",
+      "source_sha256": "c6217a29ebfff000ef18e5d267ba193875c5cc49d4099c84bde3e85f00d0325a",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day15 변경 추적",
+        "## 의도적으로 수정한 기존 파일",
+        "## 신규 파일"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY15_METHOD_REMEDIATION.md",
+      "source_sha256": "71d3d41064b80b131b96d6114616e4c12c7703f31f531efd3985d431980a47e8",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md"
+      ],
+      "source_sections": [
+        "# Day15 방법론 수정 및 회귀",
+        "## CR-01 독립 Lifecycle",
+        "## Day14 반례 회귀",
+        "## CR-02",
+        "## 저장 Day12 합성 결과 대비 영향",
+        "## 7정책·운영 계약",
+        "## CR-03 합성 Archive",
+        "## 새 Candidate"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY15_STATUS.md",
+      "source_sha256": "4c4acff561c7579028a676c228c56a724fe12d0325026aa6d307f407e26ff4a9",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day15 방법론 수정·Candidate 재동결 결과",
+        "## 실행과 재현",
+        "## 검증 범위",
+        "## Readiness 및 승인 경계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY15_VALIDITY_CONTRACT.md",
+      "source_sha256": "82e68c37b4907cad87aae81d855a0e615f97dc9bf4155658058320d5b5e9bd8f",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md"
+      ],
+      "source_sections": [
+        "# Day15 Raw Forecast 유효성 계약",
+        "## Stage별 규칙",
+        "## 상태 매핑"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY16_FINAL_RELEASE_PROTOCOL.md",
+      "source_sha256": "644fa0acc067ce38ec0d5ef2e93f3423c56d500c4716ea0266ee28347a90f405",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# 최종 단회평가 Release Protocol — 현재 비실행 계약",
+        "## 독립 Gate",
+        "## 현재 사용 가능한 정확한 명령",
+        "## Input 경로·역할 계약",
+        "## 동결할 평가 조건",
+        "## 향후 단 한 번의 실행 순서"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY16_PROJECT_HANDOFF.md",
+      "source_sha256": "0f3a3f37d51d09241cda23a11f32a9a6f06ac67e92f73bf99c5f6579382cfacc",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# 프로젝트 최종 인수인계",
+        "## 검증한 성과와 불리한 결과",
+        "## 구현·검증 인수인계",
+        "## 연구평가의 남은 조건"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY16_SOURCE_SEED_AUDIT.md",
+      "source_sha256": "507da0511d44fcd70f4d324d5e898142075879133b6887527972b6b129bded34",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# Day16 Source·Seed 감사",
+        "## 접근 분류",
+        "## 실제 저장 Seed 검사",
+        "## 발행 증거의 세 종류",
+        "## Source evidence levels",
+        "## 필요한 추가 권한·자료"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY16_STATUS.md",
+      "source_sha256": "f83e030419b373a0db0be3f390b5e18e85de7639644ddcb859ae1aefbe2598cd",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day16 최종 상태",
+        "## 원래 Candidate와 seed",
+        "## Final wiring와 dress",
+        "## 실행 명령",
+        "## Readiness와 완료 경계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY17_LEGACY_SEED_CONTRACT.md",
+      "source_sha256": "0fe8db1b67f6f6f875013008e95785356047b03364ba627d87dbc154530e3563",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md",
+        "docs/UNCERTAINTY_AND_SCENARIOS.md"
+      ],
+      "source_sections": [
+        "# Day17 Legacy·Native 연결 계약",
+        "## 증거 유형 분리",
+        "## 저장된 실제 Legacy evidence",
+        "## Lifecycle와 Native 전환",
+        "## 합성 통합과 기존 결과 비교"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY17_SOURCE_SCOPE.md",
+      "source_sha256": "29a05cdb93f4cf4c6c171dfa2db0974e17ac387e6d2700c7ced3772f9269ac05",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# Day17 제한 원천 검증 범위",
+        "## 접근 분리",
+        "## Restricted Source Validator",
+        "## Access Approval Request Specification"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY17_STATUS.md",
+      "source_sha256": "5b58ba27534f35c6fd6c2a5b45f800b0867d7713e9a4586e0c6008c5c6bc7523",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day17 상태와 종료 범위",
+        "## 시작 무결성과 접근",
+        "## 전환과 회귀",
+        "## 실제 실행 명령",
+        "## Readiness"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY2_STATUS.md",
+      "source_sha256": "0d3aa84d80452ff3839530a4ae61bbab43a249f804e2702aaaa6a024e6ef9de0",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 2 실행 결과",
+        "## 1. 생성·수정한 파일",
+        "## 2. 실제 데이터 감사 결과",
+        "## 3. 2020-07 정의 변경 처리",
+        "## 4~5. 최종 날짜와 표본 수",
+        "## 6. 다중 horizon 누수 방지",
+        "## 7. 구현·재현 명령",
+        "## 8. 전체 테스트 결과",
+        "## 9. 남은 위험",
+        "## 10. Day 3 구체 작업 — 아직 시작하지 않음"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY3_STATUS.md",
+      "source_sha256": "6644fb9acb28df7050f9328ae5a54dee45f63a66268106285533aee84aa2aaa9",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 3 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. Feature Engineering",
+        "## 3. 정보 가용성과 누수 방지",
+        "## 4. Seasonal Naive",
+        "## 5. Validation Rolling-Origin 실행",
+        "## 6~7. 실제 MAE·MASE",
+        "## 8. MASE scale과 집계",
+        "## 9. 테스트와 실제 재현 검증",
+        "## 10. 남은 한계",
+        "## 11. Day 4 구체적인 다음 작업 — 아직 미착수"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY4_ENVIRONMENT.md",
+      "source_sha256": "90bd5c07ba231a8bd347737b22de061c6f48533902cfe941f5d5b4beaf2bab2b",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md"
+      ],
+      "source_sections": [
+        "# Day 4 환경·의존성 기록"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY4_MODEL_SPEC.md",
+      "source_sha256": "3ceb37f28c2e7bac40b18a8555bc0f6a747b4100a5419c428c6a348c27c9fe9f",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md"
+      ],
+      "source_sections": [
+        "# Day 4 사전 모델 사양"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY4_STATUS.md",
+      "source_sha256": "aa8681dc4afd82b1bdad3038a642956dfe84d7677815fddbb47c6601fc874664",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 4 실행 기록",
+        "## 1. 생성·수정한 파일",
+        "## 2. 라이브러리와 설치 범위",
+        "## 3~4. 최초 모델 사양",
+        "## 5. 학습 마스크와 누수 검증",
+        "## 6~9. 실제 Validation 성능",
+        "## 10. 시간·경고·실패·재현성",
+        "## 11. 테스트 및 독립 검증",
+        "## 12. 설계 위험과 해석",
+        "## 13. Day 5 다음 작업 — 아직 미착수"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY5_STATUS.md",
+      "source_sha256": "9b9e3b7254ab58084b96db1e4f85ed65819d32278dc02ba0db3d096cd123ddba",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 5 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. 고정 사양과 환경",
+        "## 3~4. SARIMAX와 Quantile 구현",
+        "## 5~6. OOF 기간과 누수 방지",
+        "## 7~10. 확률예측 평가",
+        "## 11. 표본·결측·실패·fallback",
+        "## 12. pytest와 독립 검산",
+        "## 13. 산출물과 재현성",
+        "## 14. 가격 상승 위험과 현재 후보",
+        "## 15. Day 6의 다음 작업 — 미착수"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY5_UNCERTAINTY_DESIGN.md",
+      "source_sha256": "a499b6cfe246da163298bd6f8744e246f18a4fc1d70bbcc8f64838878140e776",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md"
+      ],
+      "source_sections": [
+        "# Day 5 불확실성 사전 설계",
+        "## 출력 계약과 해석",
+        "## 수식과 실패 처리"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY6_DESIGN.md",
+      "source_sha256": "06f37f91242ec9d1d6b5623099adf06bdc86467fe81b2846941c415210e1ec49",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md",
+        "docs/PROCUREMENT_OPTIMIZATION.md"
+      ],
+      "source_sections": [
+        "# Day 6 사전 설계와 범위 조정",
+        "## 공동 OOF와 가격 경로",
+        "## 기존 문서와의 차이",
+        "## 월별 이벤트와 정책 경계",
+        "## Toy 사전 입력과 손계산 기준"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY6_STATUS.md",
+      "source_sha256": "9344804ca89fa199ce59d4a6b6ee82c20883c727cab803e9f5e09a194b721e61",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 6 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. 고정된 공동 경로 방식",
+        "## 3. OOF 벡터 가용성",
+        "## 4. 수·가중치·품질 진단",
+        "## 5. Planning / Evaluation 분리",
+        "## 6~7. 가상 공급·수요·재고 가정",
+        "## 8. Ledger와 회계",
+        "## 9~10. Fixed Toy 실행·손계산 검산",
+        "## 11. 테스트와 독립 검증",
+        "## 12. 무결성·반복 재현·산출물",
+        "## 13. 남은 한계",
+        "## 14. Day 7 다음 작업 — 미착수"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY7_ENVIRONMENT.md",
+      "source_sha256": "26cfe78befd0683fb1da014dbedeb1c9e9e77aa8156a7d9524272ccbe8bffdc9",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md"
+      ],
+      "source_sections": [
+        "# Day 7 Solver 환경"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY7_LP_SPEC.md",
+      "source_sha256": "22f834d369b049044315a5a79d15a8cf0f19602f06ab26bedfd8a9a2dc3fdef0",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md"
+      ],
+      "source_sections": [
+        "# Day 7 사전 LP 명세",
+        "## 시점과 입력",
+        "## 상수와 변수",
+        "## Solver·수치·실패",
+        "## 실행 전 손계산 기준",
+        "## 비교·실제 Forecast smoke 범위"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY7_STATUS.md",
+      "source_sha256": "c9b3b188167cd0ac2abbb87db94edaca522d5e1bec96f98821fcc2ff9933afdd",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 7 실행 기록",
+        "## 1. 파일과 보존",
+        "## 2. 환경·고정 설정",
+        "## 3~4. LP와 납품월 계약",
+        "## 5~6. 초기상태·확정주문·월별 실행",
+        "## 7. Solver·실패·수치",
+        "## 8. 손계산 LP",
+        "## 9~10. Synthetic Toy Policy Comparison",
+        "## 11. 실제 Forecast adapter smoke",
+        "## 12. 자동·독립 검증",
+        "## 13. 산출물·재현성",
+        "## 14. 남은 한계",
+        "## 15. Day 8에 필요한 작업 — 미착수"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY8_CVAR_SPEC.md",
+      "source_sha256": "c7a28991f6733f8163830b806837d53121d5b53413096ff41b9bc67b0a0d2217",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md"
+      ],
+      "source_sections": [
+        "# Day 8 사전 CVaR·비예견성 명세",
+        "## 공유 물리 모델",
+        "## 비용과 위험 목적함수",
+        "## 검증·수치·사전 Toy"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY8_STATUS.md",
+      "source_sha256": "5c4192098c79f59c2690d2f33a81672ba2d3149ecfe97aa8080336fb7114fce9",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 8 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. CVaR 목적함수와 사전 설정",
+        "## 3. Scenario LP·물리 제약",
+        "## 4. Non-Anticipativity",
+        "## 5. 확률·가격·출처 연결",
+        "## 6. Solver·실패·수치",
+        "## 7. 손계산 결과",
+        "## 8. 동일 Synthetic Toy 총비용",
+        "## 9. 공통 상태의 계획 E/CVaR",
+        "## 10. 부족·서비스·업체 배분과 비용 구성",
+        "## 11. 실제 저장 Planning Scenario smoke",
+        "## 12. 자동 테스트",
+        "## 13. 독립 검산·재현·보존",
+        "## 14. 경제적·통계적 한계와 질문의 답",
+        "## 15. Day 9 설계 과제 — 미실행"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY9_EVALUATION_PROTOCOL.md",
+      "source_sha256": "4e0b3588d12cc47822dd122bd29b3f6dea73dd817e23a37ee04201336d3d9a05",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/VALIDATION_RESULTS.md"
+      ],
+      "source_sections": [
+        "# Day 9 사전 평가 프로토콜",
+        "## 달력과 최초 결정",
+        "## 기존 엔진과의 충돌 및 고정한 해법",
+        "## 외생 환경·정책 사양",
+        "## 가격 접근과 정보 경계",
+        "## 평가와 실패",
+        "## 해석과 후속 단계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DAY9_STATUS.md",
+      "source_sha256": "c7e0e46a7a86ea2e8017c059331986416cd1e9626962d7fcc7fc5308c35e03fb",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/VALIDATION_RESULTS.md",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Day 9 실행 기록",
+        "## 1. 생성·수정 파일",
+        "## 2. 사전 고정과 해시",
+        "## 3. Active / Runoff / 전체 기간",
+        "## 4. 초기·공급·수요·회계",
+        "## 5. 실제 가격 접근 통제",
+        "## 6. 완전성과 입력 재사용",
+        "## 7. 정책별 전체 비용",
+        "## 8. 서비스·재고·발주",
+        "## 9. Fixed 대비 변화",
+        "## 10. RA 대비 FA — 전체 입력 차이 포함",
+        "## 11. 같은 Scenario의 위험 목적 추가 효과",
+        "## 12. 모델 변경 비교",
+        "## 13. Active / Runoff 영향",
+        "## 14. 실패·누락·Solver",
+        "## 15. 자동·독립 검증",
+        "## 16. 산출물·재현·보존",
+        "## 17. 해석상 한계와 결론",
+        "## 18. Day 10 사전 설계 과제 — 미실행"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/DECISION_TIMELINE.md",
+      "source_sha256": "9515f5da3fafb20925e0cf2ed2dfcd4c82cc47395a2b56595641600385abf43c",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# 의사결정 타임라인과 정보 계약",
+        "## 월별 이벤트의 순서",
+        "## 가격의 관측 시점",
+        "## 비즈니스 horizon과 모델 horizon",
+        "## 정보 집합",
+        "## 발주·납품·가격 확정",
+        "## 공표 지연·수정·날씨에 대한 한계",
+        "## Day 6 구현된 시나리오·시뮬레이터 경계",
+        "## Day 7 Receding-Horizon"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/EVALUATION_PROTOCOL.md",
+      "source_sha256": "cc3161e3cd85c5b6c312c5a890a8eb344c461ea4c87f42c02d5c8cff8efaedb2",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PRODUCT_OVERVIEW.md"
+      ],
+      "source_sections": [
+        "# 예측·구매 정책 평가 프로토콜",
+        "## 시간 분할과 holdout 잠금",
+        "## 예측 백테스트",
+        "### 점예측 지표",
+        "### 불확실성 지표",
+        "## 정책 백테스트의 공정성",
+        "### 운영 지표",
+        "## 시나리오와 민감도",
+        "## 예측 개선과 의사결정 개선의 분리",
+        "## Day 5 구간 평가의 추가 계약",
+        "## Day 6 공동 경로·Toy 검산",
+        "## Day 7 제한적 정책 비교"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/FEATURES_AND_BASELINE.md",
+      "source_sha256": "fa66579629d6dfae30732a13ce6510dbff07602f2c152615bdc023f1e8b2799c",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md"
+      ],
+      "source_sections": [
+        "# Day 3 특징·Seasonal Naive·Validation 평가 명세",
+        "## 15개 특징과 정보 시점",
+        "## 향후 전처리 fit 경계",
+        "## Seasonal Naive",
+        "## Rolling-origin과 정답 경계",
+        "## MAE·MASE와 scale 비교",
+        "## 실제 Validation 결과",
+        "## 재현성과 한계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/MODEL_COMPARISON.md",
+      "source_sha256": "7ab04df40b088d5621f77d8afd0d22b1e9d464e28bbfbd9998834736e14146f9",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/FORECASTING_METHOD.md",
+        "docs/VALIDATION_RESULTS.md"
+      ],
+      "source_sections": [
+        "# Day 4 공정한 Validation 모델 비교",
+        "## 같은 정보와 평가 계약",
+        "## 실제 성능표",
+        "## 계산시간·경고·실패",
+        "## 산출물·재현 명령",
+        "# 위 명령이 출력한 새 run 경로를 다음 명령에 전달합니다.",
+        "## 해석과 남은 한계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/PORTFOLIO_RESULTS.md",
+      "source_sha256": "c3f400c9855572683a6b23a413cd52f6d7ee7c3f5ea795c9e995a2902f9225f0",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/VALIDATION_RESULTS.md"
+      ],
+      "source_sections": [
+        "# Portfolio results and evidence boundaries",
+        "## Validation: 실제 가격과 가상 운영",
+        "## Extensions and synthetic qualification",
+        "## 한계와 현재 잠금"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/PRIVATE_RELEASE_STATUS.md",
+      "source_sha256": "ae9295f00f34d691ddc9978abca9af37e51c5a57c8082b530d0b5c0f2403bb26",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Private release status",
+        "## 업로드 전 확인",
+        "## 실제 Private Release 검증"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/PROJECT_CHARTER.md",
+      "source_sha256": "1fba0fea8ce119b306cad99e5064efaa38775dc89e381c8fcf0558e6ff8d1306",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PRODUCT_OVERVIEW.md"
+      ],
+      "source_sections": [
+        "# 프로젝트 헌장",
+        "## 비즈니스 문제와 성공의 의미",
+        "## 단계적 MVP",
+        "## 아키텍처와 경계",
+        "## 권장안과 대안",
+        "## 미결정 사항과 변경 절차"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/PUBLIC_RELEASE_CHECKLIST.md",
+      "source_sha256": "828dedf4899517d8b81530ed1fbe1561dea18c0eeb771ea8ccc1c95f84892026",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PUBLIC_RELEASE_CHECKLIST.md"
+      ],
+      "source_sections": [
+        "# Public release — owner checklist"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/RELEASE_REPRODUCIBILITY.md",
+      "source_sha256": "ac7d5f24040fc85af4220ce378810d2a6fb57c4c441068d0fcd1e4641794cfab",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# Release reproduction contract",
+        "## A/B — 원천 없는 테스트와 합성 fixture",
+        "## C — 별도 실제 원천 필요",
+        "## D — 로컬 archive 필요"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/REPRODUCIBILITY.md",
+      "source_sha256": "6be7cca27cfa33728787af46fdddc470974137632c573c7aa3d2124084dc6a2a",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "source_sections": [
+        "# 저장 Evidence 재현 방법",
+        "## 현재 범위의 명령",
+        "## 필요한 자료와 공개 범위",
+        "## 실행·승인 경계"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/SIMULATION_ASSUMPTIONS.md",
+      "source_sha256": "efb089acd49d2e7d3dadb4b6c7f633db523c22acc01f91b626fd6bacf700d4a1",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/PROCUREMENT_OPTIMIZATION.md"
+      ],
+      "source_sections": [
+        "# 시뮬레이션 가정과 최적화 명세",
+        "## 단위와 기준 운영조건",
+        "### RNG와 경로 생성 계약",
+        "## 스트레스 시나리오 제안",
+        "## Rolling-horizon 최적화: 계획 명세",
+        "## 구현 시 검증과 민감도"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/SPLIT_DESIGN.md",
+      "source_sha256": "3ddfb6248734efa15382a8443763c719f57380070db5d9660608a06dde372a2a",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# 실제 날짜 분할과 정보 가용성 계약",
+        "## 후보 비교와 선택",
+        "## Day 0 문서와의 중요한 정정",
+        "## 원시 월수, origin 수, target-pair 수",
+        "## Origin과 정보 집합",
+        "## 학습 target의 성숙도와 purge",
+        "### 구간 간 overlap과 적용 범위",
+        "### 최소한의 bridge와 불필요한 embargo 방지",
+        "## 구현 인터페이스와 holdout 잠금",
+        "## 검증한 불변식과 남은 범위"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/UNCERTAINTY_COMPARISON.md",
+      "source_sha256": "3f9d993ef2b50df91ddf5ebec1118ede237455ae11fa8a4e106c5e792e1e7754",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/UNCERTAINTY_AND_SCENARIOS.md",
+        "docs/VALIDATION_RESULTS.md"
+      ],
+      "source_sections": [
+        "# Day 5 Validation 불확실성 비교",
+        "## 같은 평가 키와 모델 연결",
+        "## Pinball Loss",
+        "## Coverage와 평균 폭",
+        "## Historical OOF와 시점별 보정",
+        "## 실패·경고·가격 유효성",
+        "## 가격 상승 신호와 후보 판단"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    },
+    {
+      "source": "docs/WORLD_BANK_SOURCE.md",
+      "source_sha256": "375a075745ba1744712c2c1715a7625489b993016259f4ebf72e9a3522db23e7",
+      "source_commit": "874da83178ab15bc7f2a661fbba2b38b4875ab88",
+      "destinations": [
+        "docs/DATA_AND_ASOF_CONTRACT.md"
+      ],
+      "source_sections": [
+        "# World Bank 월별 원본: 출처·버전·Wheat 선택 기록",
+        "## 수집 provenance",
+        "## 실제 Excel 구조",
+        "## Wheat 관련 항목 전체 비교",
+        "### MVP 선택: Wheat, US HRW",
+        "## 공표·수정·vintage 위험",
+        "## 이용조건과 재배포 시 출처 표시"
+      ],
+      "treatment": "Concepts/equations/results/failures integrated; obsolete progress/commands retained in original history, not claimed current"
+    }
+  ],
+  "all_baseline_tracked_documents": 54,
+  "chronological_status_not_duplicated": true
+}

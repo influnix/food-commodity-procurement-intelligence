@@ -1,4 +1,9 @@
 """Audit an exact release allowlist without touching data or local artifacts."""
+
+import sys as _bootstrap_sys
+from pathlib import Path as _BootstrapPath
+_bootstrap_root = next(p for p in _BootstrapPath(__file__).resolve().parents if (p / 'pyproject.toml').is_file())
+_bootstrap_sys.path.insert(0, str(_bootstrap_root))
 import argparse
 import hashlib
 import json
@@ -7,13 +12,13 @@ import re
 import subprocess
 import tomllib
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'pyproject.toml').is_file())
 DENIED_TOP = {'data', 'artifacts', '.venv', '.git', '__pycache__', '.pytest_cache'}
 DENIED_SUFFIX = {'.csv', '.tsv', '.xlsx', '.xls', '.parquet', '.pkl', '.pickle', '.zip', '.gz', '.pyc', '.pem', '.key'}
 
 
 def release_files(root: Path = ROOT) -> tuple[str, ...]:
-    config = tomllib.loads((root / 'configs/release_allowlist.toml').read_text(encoding='utf-8'))
+    config = tomllib.loads((root / 'configs/evaluation/release_allowlist.toml').read_text(encoding='utf-8'))
     names = tuple(config['files'])
     if not names or len(names) != len(set(names)):
         raise ValueError('Allowlist must be explicit, unique and nonempty')
@@ -88,6 +93,14 @@ def main() -> int:
     args = parser.parse_args()
     names = release_files()
     report = audit_files(ROOT, names)
+    manifest_path = ROOT / 'evidence/product_release_manifest.json'
+    if manifest_path.is_file():
+        manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+        expected = {n: h for n, h in report['sha256'].items() if n != 'evidence/product_release_manifest.json'}
+        if (manifest.get('files') != expected or manifest.get('actual_holdout_execution_allowed') is not False
+                or manifest.get('source_access_granted') is not False):
+            report['passed'] = False
+            report['findings'].append({'reason': 'current_product_manifest_mismatch'})
     if args.tracked and set(tracked_files(ROOT)) != set(names):
         report['passed'] = False
         report['findings'].append({'reason': 'tracked_set_must_equal_reviewed_allowlist'})

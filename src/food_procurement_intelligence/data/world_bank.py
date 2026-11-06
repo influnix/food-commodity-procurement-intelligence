@@ -1,6 +1,6 @@
 """Offline, schema-checked extraction of the reviewed World Bank Wheat series.
 
-Run with --config configs/day1.toml. Network access requires explicit --download;
+Run with --config configs/data/source.toml. Network access requires explicit --download;
 the default only verifies and processes the pinned local snapshot.
 """
 

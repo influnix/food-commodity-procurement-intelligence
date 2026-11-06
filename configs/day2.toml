@@ -1,9 +1,0 @@
-schema_version = 1
-project_root = ".."
-stage = "audit_and_split_only"
-day1_manifest = "artifacts/day1/20261024T012917500704Z_ea1c35082787__20261024T013704254799Z/extraction_manifest.json"
-day1_manifest_sha256 = "903a77d66c81237987238b986c62e4ac4d04b6f7cbeeb1cea4e87bff16eb97ad"
-split_config = "configs/splits.toml"
-report_root = "artifacts/day2"
-development_absolute_monthly_change_threshold = 0.20
-holdout_price_statistics = false

@@ -68,7 +68,7 @@ def pipeline_audit(root: Path) -> dict:
 
 def environment_audit(root: Path) -> dict:
     packages={}
-    for line in (root/'requirements/day7-lock.txt').read_text(encoding='utf-8').splitlines():
+    for line in (root/'requirements/runtime-lock.txt').read_text(encoding='utf-8').splitlines():
         if '==' in line and not line.startswith('#'):
             name,expected=line.strip().split('==');observed=version(name)
             packages[name]={'expected':expected,'observed':observed,'matches':expected==observed}

@@ -149,7 +149,7 @@ def load_context(config_path: Path):
     root = (config_path.parent / config["project_root"]).resolve()
     if config["holdout_locked"] is not True or config["hyperparameter_search"] is not False or config["fallback"] != "none":
         raise ValueError("Day 4 requires locked holdout, no search and no fallback")
-    for key in ("day2_config", "day3_config", "split_config", "baseline_run", "report_root"):
+    for key in ("data_config", "feature_config", "split_config", "baseline_run", "report_root"):
         if not (root / config[key]).resolve().is_relative_to(root):
             raise ValueError("Config path escapes project")
     if digest(root / config["split_config"]) != config["split_config_sha256"]:
@@ -158,8 +158,8 @@ def load_context(config_path: Path):
     for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
         os.environ[name] = str(config["threads"])
     plan, _ = load_split_plans(root / config["split_config"])
-    d3 = tomllib.loads((root / config["day3_config"]).read_text(encoding="utf-8"))
-    if digest(root / config["day2_config"]) != d3["day2_config_sha256"]:
+    d3 = tomllib.loads((root / config["feature_config"]).read_text(encoding="utf-8"))
+    if digest(root / config["data_config"]) != d3["data_config_sha256"]:
         raise ValueError("Day 2 input config changed")
     features = dict(d3["features"])
     features["lags"], features["rolling_windows"] = tuple(features["lags"]), tuple(features["rolling_windows"])
@@ -173,7 +173,7 @@ def run_phase(config_path: Path, model: str) -> dict:
     directory.mkdir(parents=True, exist_ok=False)
     save_json(directory / "spec_freeze.json", {"created_at_utc": datetime.now(timezone.utc).isoformat(), "config": config,
                                               "config_sha256": digest(config_path), "model": model, "validation_fit_started": False})
-    store = load_development_store(root, root / config["day2_config"])
+    store = load_development_store(root, root / config["data_config"])
     evaluation_start = perf_counter()
     result = evaluate_model(store, plan, spec, config[model], model)
     evaluation_wall_seconds = perf_counter() - evaluation_start
@@ -211,7 +211,7 @@ def run_phase(config_path: Path, model: str) -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=Path("configs/day4.toml"))
+    parser.add_argument("--config", type=Path, default=Path("configs/forecasting/models.toml"))
     parser.add_argument("--model", choices=("sarimax", "lightgbm"), required=True)
     args = parser.parse_args()
     print(json.dumps(run_phase(args.config, args.model), indent=2))
