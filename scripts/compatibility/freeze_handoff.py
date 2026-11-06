@@ -65,7 +65,7 @@ def freeze(a:Path,b:Path,seed_path:Path) -> dict:
             'USER_AUTHORIZED':False,'HOLDOUT_EXECUTION_ALLOWED':False}
         save(ROOT/'artifacts/day16/readiness_matrix.json',{'states':states,'gates':gates,'publication':publication})
         technical=release_status({k:'PASS' for k in REQUIRED_CHECKS})
-        contracts=['AGENTS.md','README.md',*[p.relative_to(ROOT).as_posix() for p in (ROOT/'configs').glob('*') if p.is_file()],
+        contracts=['docs/DATA_AND_ASOF_CONTRACT.md','README.md',*[p.relative_to(ROOT).as_posix() for p in (ROOT/'configs').glob('*') if p.is_file()],
             *[p.relative_to(ROOT).as_posix() for p in (ROOT/'docs').glob('DAY16*.md')],
             'docs/PRODUCT_OVERVIEW.md','docs/LIMITATIONS_AND_FUTURE_WORK.md','docs/UNCERTAINTY_AND_SCENARIOS.md','docs/UNCERTAINTY_AND_SCENARIOS.md']
         code=[p.relative_to(ROOT).as_posix() for top in ('src','scripts','tests') for p in (ROOT/top).rglob('*.py') if '__pycache__' not in p.parts]

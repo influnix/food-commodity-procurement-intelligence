@@ -65,7 +65,7 @@ def freeze(a:Path,b:Path) -> dict:
             'real_new_origin_fit':'NOT_VERIFIED','real_data_capability_enabled':False,'holdout_locked':True}
         save(ROOT/'artifacts/day15/readiness_matrix.json',readiness)
         checks={name:'PASS' for name in REQUIRED_CHECKS};gate=release_status(checks)
-        contract_names=['AGENTS.md','README.md','docs/ROADMAP.md',*['configs/'+p.name for p in (ROOT/'configs').glob('*') if p.is_file()],
+        contract_names=['docs/DATA_AND_ASOF_CONTRACT.md','README.md','docs/LIMITATIONS_AND_FUTURE_WORK.md',*['configs/'+p.name for p in (ROOT/'configs').glob('*') if p.is_file()],
             *[p.relative_to(ROOT).as_posix() for p in (ROOT/'docs').glob('DAY15*.md')],
             'docs/UNCERTAINTY_AND_SCENARIOS.md','docs/UNCERTAINTY_AND_SCENARIOS.md','docs/PRODUCT_OVERVIEW.md',
             'docs/SYSTEM_ARCHITECTURE.md','docs/UNCERTAINTY_AND_SCENARIOS.md']

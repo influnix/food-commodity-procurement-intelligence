@@ -389,7 +389,7 @@ def build(output: Path) -> dict:
         if not preserved['passed']:raise AssertionError('Prior output changed')
         save(output/'preservation.json',preserved)
         save(output/'source_access_audit.json',access)
-        references = ['AGENTS.md','configs/scenarios/calibration.toml','configs/scenarios/joint_and_operations.toml','configs/evaluation/final.toml','configs/evaluation/native_synthetic.toml',CANDIDATE,RELEASE,
+        references = ['docs/DATA_AND_ASOF_CONTRACT.md','configs/scenarios/calibration.toml','configs/scenarios/joint_and_operations.toml','configs/evaluation/final.toml','configs/evaluation/native_synthetic.toml',CANDIDATE,RELEASE,
             D12+'/run_manifest.json',D12+'/calibrated.json.gz',D12+'/oof_released.json.gz',D12+'/calibration_audit.json.gz',D12+'/pool_audit.json.gz',
             'src/food_procurement_intelligence/uncertainty/calibration.py','src/food_procurement_intelligence/uncertainty/sequential.py',
             'src/food_procurement_intelligence/uncertainty/joint_scenarios.py','src/food_procurement_intelligence/uncertainty/contracts.py',

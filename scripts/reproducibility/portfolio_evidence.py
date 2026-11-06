@@ -235,7 +235,7 @@ def build(root: Path,output: Path,plot: bool=True) -> dict:
             'src/food_procurement_intelligence/simulation/engine.py','scripts/reproducibility/portfolio_evidence.py','scripts/validation/verify_portfolio_evidence.py',
             'scripts/compatibility/run_portfolio_archive_tests.py','tests/regression/test_portfolio_evidence.py'):
             ref.add(name,'implementation trace or Day13 read-only verification')
-        for name in ('docs/MVP_SCOPE.md','docs/MVP_ACCEPTANCE_REPORT.md','docs/MVP_RESULTS.md','docs/SYSTEM_ARCHITECTURE.md','docs/REPRODUCIBILITY.md','README.md','docs/ROADMAP.md'):
+        for name in ('docs/MVP_SCOPE.md','docs/MVP_ACCEPTANCE_REPORT.md','docs/MVP_RESULTS.md','docs/SYSTEM_ARCHITECTURE.md','docs/REPRODUCIBILITY.md','README.md','docs/LIMITATIONS_AND_FUTURE_WORK.md'):
             ref.add(name,'MVP portfolio documentation; preserved history with Day13 entry')
         test_path=root/'artifacts/day13/test_results.json'
         tests=read(ref.add('artifacts/day13/test_results.json','current complete regression')) if test_path.exists() else {'passed':False}

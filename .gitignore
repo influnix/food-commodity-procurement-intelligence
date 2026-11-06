@@ -1,8 +1,8 @@
-# All current/future data and local execution evidence are excluded.
+# 현재·미래의 원천과 로컬 실행기록을 제외합니다.
 /data/**
 /artifacts/**
 /docs/**
-# Explicit document exceptions are appended from the reviewed allowlist.
+# 검토한 제품 안내서만 아래에서 명시적으로 허용합니다.
 
 .venv/
 venv/
@@ -36,7 +36,7 @@ secrets.*
 Thumbs.db
 Desktop.ini
 .DS_Store
-# Prevent accidental staging of price files and generated binary outputs anywhere.
+# 가격 파일과 생성된 바이너리 결과의 우발적 추적을 방지합니다.
 *.csv
 *.tsv
 *.xlsx
@@ -51,7 +51,7 @@ Desktop.ini
 *.gz
 
 
-# Product documentation only; historical local documents remain excluded.
+# 제품 문서만 허용하며 과거 로컬 문서는 제외합니다.
 !/docs/PRODUCT_OVERVIEW.md
 !/docs/SYSTEM_ARCHITECTURE.md
 !/docs/DATA_AND_ASOF_CONTRACT.md
@@ -61,5 +61,12 @@ Desktop.ini
 !/docs/VALIDATION_RESULTS.md
 !/docs/REPRODUCIBILITY.md
 !/docs/LIMITATIONS_AND_FUTURE_WORK.md
-!/docs/MIGRATION_AND_EVIDENCE.md
-!/docs/PUBLIC_RELEASE_CHECKLIST.md
+
+# 로컬 지침·계획·체크리스트·마이그레이션 감사는 Git에 올리지 않습니다.
+/AGENTS.md
+/ROADMAP.md
+/docs/PUBLIC_RELEASE_CHECKLIST.md
+/docs/MIGRATION_AND_EVIDENCE.md
+/evidence/document_sources.json
+/evidence/migration_matrix.json
+/evidence/test_migration.json

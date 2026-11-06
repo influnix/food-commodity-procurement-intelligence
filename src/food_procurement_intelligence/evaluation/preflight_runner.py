@@ -79,7 +79,7 @@ def run_preflight(config_path: Path, root: Path | None = None) -> dict:
         package=root/'src/food_procurement_intelligence'
         contract=[*sorted(p for p in (root/'configs').iterdir() if p.suffix in ('.toml','.json')),
             *sorted((root/'requirements').glob('*-lock.txt')),root/'pyproject.toml',
-            root/'AGENTS.md',*[root/'docs'/n for n in ('DAY11_PRE_HOLDOUT_PROTOCOL.md','DAY11_RELEASE_GATE.md','DAY11_LIMITATIONS.md',
+            root/'docs/DATA_AND_ASOF_CONTRACT.md',*[root/'docs'/n for n in ('DAY11_PRE_HOLDOUT_PROTOCOL.md','DAY11_RELEASE_GATE.md','DAY11_LIMITATIONS.md',
             'DECISION_TIMELINE.md','SPLIT_DESIGN.md','DAY5_UNCERTAINTY_DESIGN.md','DAY7_LP_SPEC.md','DAY8_CVAR_SPEC.md','DAY9_EVALUATION_PROTOCOL.md')]]
         code=[*sorted(package.rglob('*.py')),*sorted((root/'tests').glob('test_*.py')),
               root/'scripts/validation/verify_preflight.py',root/'scripts/compatibility/run_preflight_tests.py']

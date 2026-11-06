@@ -1,4 +1,4 @@
-name: Offline portfolio contracts
+name: 포트폴리오 오프라인 계약 검증
 
 on:
   push:
@@ -26,16 +26,16 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.11'
-      - name: Install existing pinned dependencies
+      - name: 고정 의존성 설치
         run: |
           python -m venv .venv
           .venv/bin/python -m pip install -r requirements/runtime-lock.txt
           .venv/bin/python -m pip install pytest==8.3.5
           .venv/bin/python -m pip install --no-deps -e .
           echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
-      - name: Audit exact tracked release files
+      - name: 추적 제품 파일 안전성 검사
         run: python scripts/release/audit.py --tracked
-      - name: Run offline toy and contract scope
+      - name: 오프라인 계약 테스트 실행
         run: python scripts/ci/run_contract_tests.py
-      - name: Verify documented synthetic integration entrypoint
+      - name: 합성 통합 진입점 검증
         run: python scripts/validation/run_synthetic_checks.py

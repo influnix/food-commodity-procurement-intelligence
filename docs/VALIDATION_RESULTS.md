@@ -1,42 +1,44 @@
-# Validation results
+# 개발 검증 결과
 
-These are preserved development results, not a new experiment. Forecasts and procurement used real World Bank Validation prices; supplier/demand/inventory/cost assumptions were synthetic. Separate software integration used a synthetic price world. Actual Holdout results do not exist.
+기존 개발 결과를 보존해 설명한 문서이며 새로운 실험 결과가 아닙니다. 예측·구매 평가는 실제 World Bank Validation 가격과 가상 공급·수요·재고·비용을 사용했습니다. 별도 소프트웨어 통합은 합성 가격 경로를 사용했으며, 실제 Holdout 결과는 없습니다.
 
-## Forecasts and MVP acceptance
+## 가격 예측과 MVP 수용 기준
 
-Validation:36origins2021-06..2024-05,108origin-horizon keys/model,38unique target months2021-07..2024-08. All point models had complete108key coverage with no forecast failure.
+Validation은 2021-06..2024-05의 36개 origin, 모델별 108개 origin-horizon 키, 2021-07..2024-08의 38개 고유 target 월입니다. 모든 점예측 모델은 108개 키를 완전하게 예측했고 예측 실패는 없었습니다.
 
-| Model | MAE USD/t | Fold-as-of MASE | MAE improvement vs Seasonal Naive |
+| 모델 | MAE USD/t | 시점별 MASE | Seasonal Naive 대비 MAE 개선 |
 |---|---:|---:|---:|
 | Seasonal Naive12 |100.0296|3.2300|—|
 | SARIMAX |41.8757|1.3624|58.1367%|
 | LightGBM Direct |48.6620|1.5912|51.3524%|
 
-SARIMAX H1/H2/H3 MAE:31.9368/43.4305/50.2599; LightGBM:41.9029/48.2184/55.8647. Fold-as-of MASE uses past seasonal scales and is not the same as baseline-relative improvement. Targets overlap, so108errors are not108independent months.
+SARIMAX의 H1/H2/H3 MAE는 31.9368/43.4305/50.2599, LightGBM은 41.9029/48.2184/55.8647입니다. 시점별 MASE는 과거 계절 scale을 사용하며 기준 모델 대비 개선율과 다른 지표입니다. 겹치는 target 때문에 108개 오차를 108개 독립 월로 세지 않습니다.
 
-The five MVP requirements passed: monthly forecasting; rolling-origin backtesting; equal-condition representative two-policy comparison; source→forecast→order→receipt→cost traceability; stored-result reproducibility verification. The [aggregate evidence](../evidence/portfolio_summary.json) retains these results and original source-summary hashes. Full forecasts/ledgers/source data remain excluded local evidence.
+MVP의 월별 예측·순차 백테스트·동일 조건 대표 2개 정책 비교·원천→예측→발주→입고→비용 추적·저장 결과 재현의 다섯 기준은 모두 통과했습니다. [집계 Evidence](../evidence/portfolio_summary.json)는 수치와 원래 summary의 hash를 보존합니다. 전체 예측·원장·원천 자료는 제외된 로컬 Evidence입니다.
 
-## Representative procurement comparison
+## 대표 구매 정책 비교
 
-| Metric | Fixed | FA SARIMAX |
+| 지표 | Fixed | FA SARIMAX |
 |---|---:|---:|
-| Total Simulated Cost USD |1,351,501.68|1,365,914.16|
-| Purchase USD |1,336,441.68|1,328,834.16|
-| Holding USD |13,260.00|5,280.00|
-| Shortage USD |0|30,000.00|
-| Terminal USD |1,800.00|1,800.00|
-| Transport / disposal USD |0 /0|0 /0|
-| Fill Rate |100%|99.4737%|
-| Shortage t |0|20|
-| Mean month-end stock t |116.3158|46.3158|
+| 총 시뮬레이션 비용 USD |1,351,501.68|1,365,914.16|
+| 매입비 USD |1,336,441.68|1,328,834.16|
+| 보관비 USD |13,260.00|5,280.00|
+| 부족비 USD |0|30,000.00|
+| 말기비 USD |1,800.00|1,800.00|
+| 운송 / 폐기비 USD |0 /0|0 /0|
+| 수요 충족률 |100%|99.4737%|
+| 부족량 t |0|20|
+| 평균 월말재고 t |116.3158|46.3158|
 
-FA costs **14,412.48USD(+1.0664%) more**. Purchase−7,607.52 and holding−7,980 are outweighed by shortage+30,000. Active35months saves38,415.36, but Runoff3months adds52,827.84. At the last decision, FA has stock20+pipeline80+maximum current orders180=280t against300t remaining demand. Its stored OPTIMAL plan already shows20t final shortage. This is an accounting/physical-state diagnosis, not proof that forecast error alone caused the outcome.
+FA 비용은 **14,412.48 USD(+1.0664%) 더 높습니다.** 매입비 −7,607.52와 보관비 −7,980 감소를 부족비 +30,000이 초과했습니다. Active35개월에는 38,415.36이 낮지만 Runoff3개월에는 52,827.84가 높습니다.
 
-**Better price forecasting does not automatically translate into lower procurement costs.** Lead times, stock, capacity, Runoff and service penalties matter.
+마지막 결정 시 FA의 재고20+pipeline80+현재 최대주문180=280t는 남은 수요300t보다 작았습니다. 저장된 OPTIMAL 계획에도 마지막 20t 부족이 있습니다. 이는 회계·물리 상태의 진단이며 예측오차 하나만이 원인이라는 인과 증명은 아닙니다.
 
-## Seven-policy extension
+**예측 정확도가 높아져도 실제 구매비용이 반드시 감소하는 것은 아닙니다.** 납기·재고·용량·Runoff·서비스 손실을 함께 평가해야 합니다.
 
-| Policy | Total Simulated Cost USD | Fill Rate | Shortage t | Difference vs Fixed USD |
+## 7개 정책 확장 비교
+
+| 정책 | 총 시뮬레이션 비용 USD | 수요 충족률 | 부족량 t | Fixed 대비 차이 USD |
 |---|---:|---:|---:|---:|
 | Fixed |1,351,501.68|100%|0|0|
 | FA SARIMAX |1,365,914.16|99.4737%|20|+14,412.48|
@@ -46,28 +48,30 @@ FA costs **14,412.48USD(+1.0664%) more**. Purchase−7,607.52 and holding−7,98
 | RN LightGBM |1,333,962.24|100%|0|−17,539.44|
 | RA LightGBM |1,348,234.20|100%|0|−3,267.48|
 
-On the same scenarios, RA−RN is−1,591.92USD for SARIMAX but+14,271.96 for LightGBM; both have zero shortage. RN/RA stock increases111.0526→115.7895t(SAR) and52.6316→98.3630t(LGB). The first-state planned E/CVaR is34,457.74/40,270.07→34,461.47/39,774.22 for SAR and35,650.01/42,846.71→35,696.47/42,073.71 for LGB. Lower planned tail can cost more in expectation and does not establish realized long-run market CVaR. FA-to-RA also changes point/scenario inputs, so it is not a pure CVaR effect.
+같은 시나리오에서 RA−RN 비용은 SARIMAX −1,591.92 USD, LightGBM +14,271.96 USD이며 두 모델 모두 부족은 0입니다. RN/RA 재고는 SARIMAX 111.0526→115.7895t, LightGBM 52.6316→98.3630t로 증가합니다.
 
-All seven historical policies completed;216optimization decisions were checked OPTIMAL, with no missing forecast/scenario, solver failure or fallback. Validation-only Active performance must not be detached from inherited Runoff states. Failure tests stop full comparisons and preserve a conservative confirmed prefix; they do not fabricate missing partial ledgers.
+첫 상태의 계획 E/CVaR는 SARIMAX 34,457.74/40,270.07→34,461.47/39,774.22, LightGBM 35,650.01/42,846.71→35,696.47/42,073.71입니다. 계획 tail 감소는 기대비용 증가와 함께 나타날 수 있으며 장기 실현 시장 CVaR를 입증하지 않습니다. FA→RA에는 점예측·시나리오 입력 차이도 있으므로 순수 CVaR 효과로 부르지 않습니다.
 
-## Operational sensitivity
+실제 Validation 기반 7개 정책은 모두 완주했습니다. 최적화 결정 216개는 검산한 OPTIMAL이었고 누락 예측·시나리오·solver 실패·fallback은 없었습니다. Active 성과는 그 상태를 이어받는 Runoff와 함께 해석해야 합니다. 실패 테스트는 완전 비교를 차단하고 보수적인 확인 가능 prefix를 남기며 없는 부분 원장을 만들지 않습니다.
 
-The11completed cells are baseline+8OAT+2stress. Another three horizon/lag requests were audited as unsupported, not omitted successful runs. The table is a preserved aggregate diagnostic on one shared price path, not eleven independent market trials.
+## 운영조건 민감도
 
-| Cell | Fixed | FA S | RN S | RA S | FA L | RN L | RA L |
+완료한 11개 조건은 기준선+OAT8+stress2입니다. 다른 Horizon·지연 요청 3개는 성공 사례에서 누락한 것이 아니라 감사 후 미지원으로 분류했습니다. 다음 표는 같은 가격 경로의 기존 집계 진단이며 11개 독립 시장 실험이 아닙니다.
+
+| 조건 | Fixed | FA S | RN S | RA S | FA L | RN L | RA L |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baseline |1,351,501.68|1,365,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
-| initial inventory100 |1,490,401.68|1,401,831.12|1,388,412.72|1,383,280.56|1,366,338.96|1,366,338.96|1,381,240.44|
-| initial inventory300 |1,362,001.68|1,331,836.08|1,318,775.04|1,318,307.76|1,301,366.16|1,301,366.16|1,316,449.80|
-| shortage penalty750 |1,351,501.68|1,350,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
-| shortage penalty3000 |1,351,501.68|1,395,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
-| terminal weight0 |1,349,701.68|1,364,114.16|1,350,695.76|1,349,103.84|1,332,162.24|1,332,162.24|1,346,434.20|
-| terminal weight30 |1,355,701.68|1,370,114.16|1,356,695.76|1,355,103.84|1,338,162.24|1,338,162.24|1,352,434.20|
-| holding6 |1,364,761.68|1,369,018.32|1,359,098.64|1,364,012.68|1,339,487.28|1,339,962.24|1,353,786.52|
-| B capacity60 |1,351,501.68|1,368,834.72|1,352,971.44|1,350,903.84|1,340,646.72|1,340,646.72|1,347,241.40|
-| demand120stress |1,436,101.68|1,395,371.52|1,381,953.12|1,380,361.20|1,363,419.60|1,363,419.60|1,379,947.26|
-| A delay1stress |1,348,602.96|1,465,295.28|1,349,597.04|1,348,005.12|1,433,343.36|1,433,343.36|1,381,982.20|
+| 기준선 |1,351,501.68|1,365,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
+| 초기재고100 |1,490,401.68|1,401,831.12|1,388,412.72|1,383,280.56|1,366,338.96|1,366,338.96|1,381,240.44|
+| 초기재고300 |1,362,001.68|1,331,836.08|1,318,775.04|1,318,307.76|1,301,366.16|1,301,366.16|1,316,449.80|
+| 부족비 계수750 |1,351,501.68|1,350,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
+| 부족비 계수3000 |1,351,501.68|1,395,914.16|1,352,495.76|1,350,903.84|1,333,962.24|1,333,962.24|1,348,234.20|
+| 말기편차 계수0 |1,349,701.68|1,364,114.16|1,350,695.76|1,349,103.84|1,332,162.24|1,332,162.24|1,346,434.20|
+| 말기편차 계수30 |1,355,701.68|1,370,114.16|1,356,695.76|1,355,103.84|1,338,162.24|1,338,162.24|1,352,434.20|
+| 보관비6 |1,364,761.68|1,369,018.32|1,359,098.64|1,364,012.68|1,339,487.28|1,339,962.24|1,353,786.52|
+| B 용량60 |1,351,501.68|1,368,834.72|1,352,971.44|1,350,903.84|1,340,646.72|1,340,646.72|1,347,241.40|
+| 수요120 충격 |1,436,101.68|1,395,371.52|1,381,953.12|1,380,361.20|1,363,419.60|1,363,419.60|1,379,947.26|
+| A 지연1 충격 |1,348,602.96|1,465,295.28|1,349,597.04|1,348,005.12|1,433,343.36|1,433,343.36|1,381,982.20|
 
-S=SARIMAX,L=LightGBM. Initial-inventory costs are sunk; different initial-stock cell totals are not policy savings. Demand120 in2022-01..03 and A cohort delay1 for the same order months were evaluator-only; planned demand100/nominal delay0 stayed fixed. Horizon2/6 and publication lag2 are unsupported under the frozen3horizon/lag1 contracts; no H4..6 or relabeled forecasts were invented.
+S=SARIMAX, L=LightGBM입니다. 초기재고 취득비는 매몰비용이므로 초기재고가 다른 조건의 총비용 차이를 정책 절감으로 해석하지 않습니다. 2022-01..03의 수요120과 같은 발주월 A cohort의 지연1은 평가 엔진에만 적용했고, 계획수요100·명목 지연0은 유지했습니다. 고정된 3개 Horizon·lag1 계약에서 Horizon2/6·공표 lag2는 미지원이며 H4..6이나 재라벨링한 예측을 만들지 않았습니다.
 
-No policy wins every cell; LGB FA/RN advantages are sensitive to low stock/A delay, while the tiny SAR RA–Fixed difference is often a near tie and RA–RN ordering can reverse with holding cost. These post-hoc diagnostics did not select new defaults. Coverage/tail probabilities, revisions, synthetic operations and [other limitations](LIMITATIONS_AND_FUTURE_WORK.md) remain.
+모든 조건에서 최저비용인 정책은 없습니다. LightGBM FA/RN의 우위는 낮은 재고·A 지연에 민감하고, 작은 SARIMAX RA–Fixed 차이는 근소한 차이에 가깝습니다. 보관비에 따라 RA–RN 순위도 바뀔 수 있습니다. 사후 진단을 새 기본값 선택으로 사용하지 않았습니다. Coverage·tail 확률·수정 데이터·가상 운영과 [연구 한계](LIMITATIONS_AND_FUTURE_WORK.md)를 유지합니다.

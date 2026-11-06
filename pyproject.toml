@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "food-procurement-intelligence"
 version = "0.1.0"
-description = "Forecasting and procurement decision evaluation for food commodities"
+description = "식품 원자재 가격 예측과 구매 의사결정 평가"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []

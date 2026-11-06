@@ -1,71 +1,85 @@
-# Food Commodity Procurement Intelligence
+# Food Commodity Procurement Intelligence — 원자재 조달 의사결정
 
-**A leakage-aware forecasting and procurement decision system that connects monthly wheat prices to purchasing plans, inventory flows, cost and service outcomes.**
+## 1. 프로젝트 개요
 
-Procurement teams must balance price with supplier lead times, capacity, stock and shortage penalties. This project tests whether better price forecasts improve those decisions under the same operating conditions.
+**월별 밀 가격 예측을 구매 계획·재고 흐름·비용·공급 서비스 평가로 연결한 데이터사이언스 포트폴리오입니다.** 가격을 잘 예측하는 모델이 실제 구매 의사결정에서도 더 나은 결과를 내는지 같은 운영조건에서 검증합니다.
 
-**Portfolio MVP: 5/5 accepted. Actual Final Holdout: unevaluated and locked. Actual Source/Seed Runtime: NOT_VERIFIED.**
+MVP 수용 기준은 **5/5 PASS**입니다. 실제 최종 Holdout은 **미평가·잠금** 상태이며, 실제 원천·시드의 실행 연결(Source/Seed Runtime)은 **NOT_VERIFIED**입니다.
 
-## Solution overview
+## 2. 해결하려는 비즈니스 문제
 
-Forecast three delivery months, plan supplier orders, execute only the current order and reoptimize next month. Compare Fixed, Forecast-Aware, Risk-Neutral and CVaR Risk-Aware policies with identical external paths and independent inventory states. Preserve forecast/decision/receipt/cost provenance and fail explicitly when inputs or solutions are invalid.
+구매 담당자는 낮은 가격뿐 아니라 공급업체의 납기와 공급 용량, 보유 재고, 부족 시 손실을 함께 고려해야 합니다. 이 프로젝트는 가격 예측 오차와 구매 성과를 별도로 측정하고, 정확도 개선이 총비용과 수요 충족률 개선으로 이어지는지 확인합니다.
+
+## 3. 전체 시스템 아키텍처
 
 ```mermaid
 flowchart LR
-  A[World Bank source and as-of availability] --> B[Origin-local features]
+  A[World Bank 원천과 시점별 가용성] --> B[의사결정 시점별 특징]
   B --> C[Seasonal Naive / SARIMAX / LightGBM]
-  C --> D[Horizon calibration / Joint scenarios]
-  C --> E[Deterministic purchasing LP]
-  D --> F[Scenario RN / CVaR LP]
-  E --> G[Current order only]
+  C --> D[Horizon별 보정 / 공동 시나리오]
+  C --> E[결정론적 구매 LP]
+  D --> F[시나리오 RN / CVaR LP]
+  E --> G[현재 발주만 실행]
   F --> G
-  H[Fixed policy] --> I[Inventory and receipt-month cost engines]
+  H[고정 구매 정책] --> I[재고와 수령월 비용 엔진]
   G --> I
-  I --> J[Cost / service / rolling evaluation]
+  I --> J[비용 / 서비스 / 순차 평가]
 ```
 
-## Core capabilities
+세 납품월의 가격을 예측해 공급업체별 발주를 계획하고, 현재 주문만 확정한 뒤 다음 달에 다시 최적화합니다. 정책마다 재고 상태를 분리하고 동일한 외생 경로로 비교하며, 입력·해·회계 검증에 실패하면 명시적으로 중단합니다.
 
-- Literal World Bank workbook parsing, schema/unit checks, snapshot provenance and restricted-source validation.
-- As-of feature engineering, mature-label TrainingBatch, rolling forecasts and immutable Native/Legacy evidence contracts.
-- Horizon-wise rolling interval calibration and complete-vector OOF Joint bootstrap: recent60/minimum24,128paths.
-- Supplier/capacity/lead-time purchasing LPs, shared-scenario RN/RA decisions, independent inventory accounting and terminal/Runoff checks.
-- Seven-policy evaluation, operational sensitivity, explicit solver/failure states and independent saved-result verification.
+## 4. 핵심 기능
 
-The domain packages are data, features, forecasting, uncertainty, optimization, policies, simulation and evaluation under `src/food_procurement_intelligence/`. Named specifications are in `configs/data`, `forecasting`, `scenarios`, `procurement` and `evaluation`.
+- World Bank 원본 구조·단위 검사, 수집 Snapshot 추적, 제한된 원천 검증
+- As-Of 특징 생성, 성숙한 학습 타깃, 순차적 백테스트와 예측 발행 증거 관리
+- Horizon별 구간 보정과 완전 벡터 OOF 공동 시나리오: 최근 60개·최소 24개, 128경로
+- 납기·발주 용량을 반영한 LP, 위험중립·CVaR 위험회피 정책, 재고·비용 회계
+- 7개 정책 비교, 운영조건 민감도, 실패 상태 기록과 저장 결과 독립 검산
 
-## Data and evaluation design
+구현은 `src/food_procurement_intelligence/`의 data/features/forecasting/uncertainty/optimization/policies/simulation/evaluation 패키지로 구성됩니다. 설정은 `configs/` 아래 기능별로 구분합니다.
 
-The benchmark is World Bank Pink Sheet **Wheat US HRW, nominal USD/metric tonne**. At month-end t, use observation months≤t−1 and publication timestamps≤decision time. Delivery H1/H2/H3 target t+1/t+2/t+3: steps2/3/4 from the latest observation. Complete training vectors require o+3≤t−1 plus all publication conditions.
+## 5. 데이터 및 시점별 정보 가용성
 
-Validation covers36origins(2021-06..2024-05),108origin-horizon predictions/model and38unique target months(2021-07..2024-08). Targets overlap. Actual prices come from one revised Snapshot with assumed publication lag: **pseudo-real-time**, without verified historical vintages. Raw/processed/approved price data and large execution archives are excluded from Git.
+World Bank Pink Sheet의 **Wheat US HRW, 명목 USD/metric tonne**을 사용합니다. 월말 t에는 관측월이 t−1 이하이고 공표시각이 의사결정 시각 이하인 자료만 사용할 수 있습니다. H1/H2/H3의 납품 타깃은 t+1/t+2/t+3이며, 최신 관측 기준 2/3/4개월 앞입니다.
 
-## Key results
+학습에 쓰는 과거 origin o의 완전 타깃은 o+3≤t−1이고 모두 공표된 상태여야 합니다. 현재 수정 Snapshot과 가정한 공표 지연을 사용하므로 평가는 **pseudo-real-time**입니다. 실제 과거 Vintage는 미검증이며 원천·가공 가격과 대규모 실행 기록은 Git에 포함하지 않습니다.
 
-| Forecast model | Validation MAE (USD/t) | Fold-as-of MASE |
+## 6. 예측 모델과 평가 방법
+
+Seasonal Naive, SARIMAX, LightGBM Direct를 고정 사양으로 비교합니다. 개발 검증은 2021-06..2024-05의 **36개 origin × 3 Horizon = 모델별 108개 예측**입니다. 타깃은 2021-07..2024-08의 38개 고유 월이며 서로 겹칩니다. 108개 오차를 독립 표본으로 취급하지 않습니다.
+
+## 7. 구매 정책 및 최적화
+
+정기 고정 구매(Fixed), 점예측 기반 구매(FA), 시나리오 위험중립(RN), CVaR 위험회피(RA)를 비교합니다. SARIMAX·LightGBM별 FA/RN/RA와 Fixed를 합쳐 7개 정책입니다. 납기·용량·기존 pipeline을 반영하고 수령월 가격으로 비용을 한 번만 계상합니다. 동일 모델 RN/RA는 같은 Planning 시나리오를 사용합니다.
+
+## 8. 핵심 Validation 결과
+
+| 예측 모델 | MAE (USD/t) | 시점별 MASE |
 |---|---:|---:|
 | Seasonal Naive |100.0296|3.2300|
 | SARIMAX |**41.8757**|**1.3624**|
 | LightGBM Direct |48.6620|1.5912|
 
-| Representative policy | Total Simulated Cost (USD) | Fill Rate | Shortage |
+| 대표 구매 정책 | 총 시뮬레이션 비용 (USD) | 수요 충족률 | 부족량 |
 |---|---:|---:|---:|
 | Fixed |**1,351,501.68**|**100%**|**0t**|
 | Forecast-Aware SARIMAX |1,365,914.16|99.4737%|20t|
 
-SARIMAX reduced forecast MAE by58.14%, but its FA procurement policy cost **14,412.48USD(+1.0664%) more**. Lower purchase/holding costs were outweighed by shortage cost and Runoff constraints.
+SARIMAX의 MAE는 기준보다 58.14% 낮았지만, FA 구매비용은 **14,412.48 USD(+1.0664%) 높았습니다.** 추가 5개 정책·CVaR·11개 운영조건 민감도는 [검증 결과](docs/VALIDATION_RESULTS.md)에서 확인할 수 있습니다.
 
-**Better price forecasting does not automatically translate into lower procurement costs.** Evaluate lead times, stock, capacity, terminal conditions and service penalties alongside accuracy.
+## 9. 비즈니스 관점의 인사이트
 
-These are **real Validation prices with synthetic purchasing operations**, not corporate savings, causal effects or independent Holdout performance. The five additional policies, CVaR and11operational sensitivity cells are documented as extensions in [Validation results](docs/VALIDATION_RESULTS.md). Separate synthetic Native/Legacy qualification does not verify actual market-source Runtime.
+**예측 정확도가 높아져도 실제 구매비용이 반드시 감소하는 것은 아닙니다.** 매입·보관비 감소를 부족 비용과 Runoff 제약이 상쇄했습니다. 가격 예측과 함께 납기·재고·용량·종료조건·서비스 손실을 평가해야 합니다.
 
-## Quick start and reproducibility
+이는 **실제 Validation 가격을 사용한 가상 구매 운영 시뮬레이션**입니다. 실제 기업의 절감 실적·인과효과·최종 Holdout 성능이 아닙니다. 합성 Native/Legacy 통합 검증도 실제 시장 원천 연결의 검증과 구분합니다.
 
-Use Python3.11 and an activated virtual environment:
+## 10. 설치 및 실행 방법
+
+Python 3.11과 활성화한 가상환경을 사용합니다.
 
 ```sh
 python -m venv .venv
-# Activate the generated environment using your shell's standard activation command.
+# 사용하는 셸의 표준 명령으로 생성한 가상환경을 활성화합니다.
 python -m pip install -r requirements/runtime-lock.txt
 python -m pip install pytest==8.3.5
 python -m pip install --no-deps -e .
@@ -74,28 +88,28 @@ python scripts/validation/run_synthetic_checks.py
 python scripts/release/audit.py
 ```
 
-The first check preserves **all330previous clean-checkout contract cases**. The second reruns **six existing synthetic integration cases**: seven-policy engine/LP execution, shared scenarios, future-information invariance, lambda boundaries and non-anticipativity. The six are a subset of330, not new market experiments. Neither command reads source prices or excluded local Evidence; test network connections are blocked. CI also verifies both entrypoints.
+## 11. 테스트와 재현성
 
-Historical613passed refers to an excluded local archive suite. Replaying original source/forecast/evidence runs requires separately prepared, approved data and recorded artifacts. Do not run the entire archive-dependent suite expecting a bare clone to contain those inputs. See [Reproducibility](docs/REPRODUCIBILITY.md) for environment, installation, scopes and historical freeze boundaries.
+계약 테스트 **330개 전체**를 원천 없는 환경에서 실행합니다. 합성 진입점은 7개 정책의 엔진·LP, 공동 시나리오, 미래정보 변경 불변성, λ 경계와 비예견성 검증 **6개**를 실행합니다. 6개는 330개의 부분집합이며 336개의 고유 테스트가 아닙니다.
 
-## Limits and current status
+두 진입점은 원천 가격·제외된 로컬 Evidence를 읽지 않고 테스트 중 네트워크 연결을 차단합니다. 과거 전체 613개 통과 기록은 별도 로컬 archive에 의존합니다. 전체 622개 항목이 수집되더라도 깨끗한 저장소에서 전부 실행했다고 주장하지 않습니다. [재현성 안내](docs/REPRODUCIBILITY.md)에 범위와 데이터 준비 조건을 구분했습니다.
 
-Interval Coverage was below nominal80%. Joint probabilities are empirical, operations are synthetic and results depend on one commodity/history, revisions, Validation selection, fixed planning horizon and Runoff/terminal assumptions. [Limitations](docs/LIMITATIONS_AND_FUTURE_WORK.md) remain explicit.
+## 12. 기술적 한계
 
-**ACCESS_APPROVAL_REQUIRED remains in force.** Actual Source Export/Seed Runtime is unverified; actual Bridge/Holdout reading, fit, policy evaluation and unlock are disabled. This release consolidates software and documentation without new models, tuning, market experiments or dashboards. The repository stays PRIVATE; the owner has not selected a code license.
+명목 80%에 못 미친 구간 Coverage, 경험적 시나리오 확률, 단일 원재료·시장경로, 수정 데이터, 가상 운영, Validation 선택편향과 계획창·Runoff·말기 근사가 남습니다. [연구 및 운영상 한계](docs/LIMITATIONS_AND_FUTURE_WORK.md)를 참고하세요.
 
-## Technical documentation
+실제 원천·시드 연결은 **NOT_VERIFIED / ACCESS_APPROVAL_REQUIRED**입니다. 실제 Bridge/Holdout 읽기·학습·구매평가·잠금 해제는 비활성입니다. 저장소는 PRIVATE이며 코드 라이선스는 소유자가 아직 선택하지 않았습니다.
 
-| Topic | Guide |
+## 13. 상세 기술 문서
+
+| 주제 | 문서 |
 |---|---|
-| Purpose, inputs/outputs and APIs | [Product overview](docs/PRODUCT_OVERVIEW.md) |
-| Pipeline and ownership boundaries | [System architecture](docs/SYSTEM_ARCHITECTURE.md) |
-| Source, temporal access and Legacy evidence | [Data and as-of contract](docs/DATA_AND_ASOF_CONTRACT.md) |
-| Features, model specs and backtesting | [Forecasting method](docs/FORECASTING_METHOD.md) |
-| Validity, calibration and Joint maturity | [Uncertainty and scenarios](docs/UNCERTAINTY_AND_SCENARIOS.md) |
-| LPs, CVaR and inventory accounting | [Procurement optimization](docs/PROCUREMENT_OPTIMIZATION.md) |
-| Forecast, seven-policy and sensitivity results | [Validation results](docs/VALIDATION_RESULTS.md) |
-| Safe execution and archive reproduction | [Reproducibility](docs/REPRODUCIBILITY.md) |
-| Old/new file and evidence mapping | [Migration and evidence](docs/MIGRATION_AND_EVIDENCE.md) |
-
-Future source qualification, separately approved final research evaluation and external validity studies are [independent backlog items](ROADMAP.md). Any owner-led Public transition must first satisfy the [Public release checklist](docs/PUBLIC_RELEASE_CHECKLIST.md).
+| 목적·입출력·사용 사례·API | [제품 개요](docs/PRODUCT_OVERVIEW.md) |
+| 파이프라인과 정보 소유 경계 | [시스템 아키텍처](docs/SYSTEM_ARCHITECTURE.md) |
+| 원천·As-Of·Legacy 증거 | [데이터 및 시점별 정보 가용성](docs/DATA_AND_ASOF_CONTRACT.md) |
+| 특징·모델·순차 평가 | [가격 예측 방법](docs/FORECASTING_METHOD.md) |
+| 유효성·구간 보정·공동 경로 | [불확실성과 시나리오](docs/UNCERTAINTY_AND_SCENARIOS.md) |
+| LP·CVaR·재고 및 비용 회계 | [구매 의사결정 최적화](docs/PROCUREMENT_OPTIMIZATION.md) |
+| 예측·정책·운영조건별 결과 | [검증 결과](docs/VALIDATION_RESULTS.md) |
+| 안전한 실행·환경·재현 범위 | [재현성](docs/REPRODUCIBILITY.md) |
+| 연구 한계·확장 가능성 | [연구 및 운영상 한계](docs/LIMITATIONS_AND_FUTURE_WORK.md) |

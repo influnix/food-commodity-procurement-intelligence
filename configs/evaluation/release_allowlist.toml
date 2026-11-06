@@ -1,11 +1,9 @@
 schema_version = 1
-# Exact reviewed product files; data/artifacts are never eligible.
+# 검사한 제품 파일만 포함합니다. 원천·실행기록·로컬 운영 문서는 제외합니다.
 files = [
   ".github/workflows/contracts.yml",
   ".gitignore",
-  "AGENTS.md",
   "README.md",
-  "ROADMAP.md",
   "configs/compatibility/initial_proposal.toml",
   "configs/data/quality.toml",
   "configs/data/restricted_export.toml",
@@ -29,19 +27,14 @@ files = [
   "docs/DATA_AND_ASOF_CONTRACT.md",
   "docs/FORECASTING_METHOD.md",
   "docs/LIMITATIONS_AND_FUTURE_WORK.md",
-  "docs/MIGRATION_AND_EVIDENCE.md",
   "docs/PROCUREMENT_OPTIMIZATION.md",
   "docs/PRODUCT_OVERVIEW.md",
-  "docs/PUBLIC_RELEASE_CHECKLIST.md",
   "docs/REPRODUCIBILITY.md",
   "docs/SYSTEM_ARCHITECTURE.md",
   "docs/UNCERTAINTY_AND_SCENARIOS.md",
   "docs/VALIDATION_RESULTS.md",
-  "evidence/document_sources.json",
-  "evidence/migration_matrix.json",
   "evidence/portfolio_summary.json",
   "evidence/product_release_manifest.json",
-  "evidence/test_migration.json",
   "pyproject.toml",
   "requirements/forecasting-lock.txt",
   "requirements/runtime-lock.txt",

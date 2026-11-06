@@ -1,40 +1,39 @@
-# Limitations and independent future work
+# 연구 및 운영상 한계와 확장 방향
 
-## Data and scientific validity
+## 데이터와 통계적 타당성
 
-1. Latest revised World Bank prices may differ from values first published historically. A single snapshot does not reconstruct past vintages.
-2. Next-month-end `available_at` is an assumption, not independently observed first-release timing. Revised-snapshot historical simulation is pseudo-real-time.
-3. HRW grade changes at2020-07. The boundary is known; a structural break or causal quality-price effect has not been established.
-4. Only one commodity/market/history is studied. Gulf benchmark prices do not represent every delivered supplier contract.
-5. Historical OOF/rolling forecasts share targets, training history and time dependence. Monthly losses/cost differences are not independent samples.
-6. Nominal80% intervals undercovered in Validation. No exchangeability guarantee follows from rolling conformal adjustment here.
-7. Joint bootstrap weights are empirical draws, not validated future event probabilities. Separate seeds from one pool are not independent OOS evidence.
-8. Price is the modeled uncertainty. Real demand/delay distributions or price–supply correlations were not estimated.
+1. 최신 수정 World Bank 가격은 당시 최초 발표값과 다를 수 있으며 단일 Snapshot으로 과거 Vintage를 복원할 수 없습니다.
+2. 다음 달 말 `available_at`은 독립적으로 관측한 최초 공표시각이 아닌 가정입니다. 수정 Snapshot의 역사적 평가는 pseudo-real-time입니다.
+3. HRW 정의는 2020-07에 바뀌었습니다. 경계는 확인됐지만 구조단절·품질의 인과적 가격효과는 입증하지 않았습니다.
+4. 단일 원재료·시장·기간을 연구했습니다. Gulf 기준가격이 모든 지역·업체의 실제 납품계약을 대표하지 않습니다.
+5. 과거 OOF와 순차 예측은 target·학습이력·시간 의존성을 공유합니다. 월별 오차·비용 차이는 독립 표본이 아닙니다.
+6. 명목 80% 구간은 Validation에서 과소포함했습니다. 이 환경의 rolling conformal 보정이 교환가능성 기반 보장을 의미하지 않습니다.
+7. Joint bootstrap 가중치는 경험적 추출이며 검증된 미래 사건 확률이 아닙니다. 같은 pool의 다른 seed도 독립 OOS가 아닙니다.
+8. 모델링한 불확실성은 가격입니다. 실제 수요·지연 분포와 가격·공급의 상관은 추정하지 않았습니다.
 
-## Operational and economic validity
+## 운영과 경제적 타당성
 
-9. Demand, suppliers, premiums, capacities, stock and costs are synthetic, not observed company operations.
-10. The fixed3month planning horizon has no supported H4..6 forecasts. Lag2 requires new correctly timed forecasts/OOF, not relabeling.
-11. Shared decisions/physical flows across price scenarios are non-anticipative but not a full adaptive multistage stochastic program.
-12. Planned disposal W=0 is conservative. Forced overflow may be feasible in the engine but infeasible in this restricted LP.
-13. Initial stock acquisition is sunk; salvage0, terminal deviation, Runoff3months and finite horizon materially affect results. Terminal penalty is not an estimated asset value.
-14. The same Validation was used to compare/prefer SARIMAX; model/selection bias remains. Lower LGB simulated cost does not silently change the default specification.
-15. Operational sensitivity is post-hoc diagnostic, not independent preregistration. Cells are not independent market trials or frequencies of policy success.
-16. Planned scenario CVaR is not long-run realized market CVaR, a service guarantee, corporate savings or an identified causal effect.
+9. 수요·업체·할증·용량·재고·비용은 실제 기업에서 관측한 운영자료가 아닌 가정입니다.
+10. 고정 3개월 계획창에는 H4..6 예측이 없습니다. lag2에는 올바른 시점의 새 예측·OOF가 필요하며 재라벨링으로 대체할 수 없습니다.
+11. 시나리오 간 발주·물리 흐름 공유는 비예견적이지만 완전한 적응형 다단계 확률 최적화는 아닙니다.
+12. 계획 폐기 W=0은 보수적입니다. 엔진이 처리할 수 있는 강제 overflow도 제한 LP에서는 불가능할 수 있습니다.
+13. 초기재고 취득비는 매몰비용입니다. 잔존가치0·말기편차·Runoff3개월·유한 계획창이 결과에 영향을 주며 말기 패널티는 추정한 자산가치가 아닙니다.
+14. 같은 Validation에서 SARIMAX를 비교·선호한 선택편향이 남습니다. LightGBM의 가상 비용이 낮다고 고정 기본 사양을 바꾸지 않습니다.
+15. 운영 민감도는 사후 진단이며 독립 사전등록이 아닙니다. 각 조건은 독립 시장 반복이나 정책 성공 확률이 아닙니다.
+16. 계획 시나리오 CVaR는 장기 실현 시장 CVaR·서비스 보장·기업 절감·식별된 인과효과가 아닙니다.
 
-## Software qualification and current access
+## 소프트웨어 검증과 현재 접근 범위
 
-17. Historical synthetic Native/Legacy qualification is separate from actual World Bank source integration. Real Source Export and Seed Runtime remain NOT_VERIFIED.
-18. The actual Final Holdout is unevaluated and locked. A future single historical evaluation would still not identify independent repeated market risk.
-19. Python source/session guards are API safeguards, not OS security boundaries. Repository exclusion does not itself grant data rights.
-20. The clean-checkout contract suite is narrower than the historical613case local archive suite. Missing evidence must not be treated as reproduced.
+17. 합성 Native/Legacy 통합은 실제 World Bank 원천 연결과 다릅니다. 실제 Source Export·Seed Runtime은 NOT_VERIFIED입니다.
+18. 실제 최종 Holdout은 미평가·잠금입니다. 향후 단일 역사적 평가도 독립 반복 시장위험을 식별하지 못합니다.
+19. Python 원천·세션 guard는 API 안전장치이며 OS 보안 경계가 아닙니다. Git 제외가 데이터 이용권한을 부여하지도 않습니다.
+20. clean checkout 계약 테스트는 과거 전체 613개 로컬 archive 검증보다 범위가 좁습니다. 없는 Evidence를 재현했다고 표시하지 않습니다.
 
-## Backlog, requiring separate work
+## 향후 연구 방향
 
-- Approved historical-only source Export, external hashes/generation evidence and restricted actual context/Legacy qualification.
-- Separately validated real adapter and eligible execution Candidate; only then explicit latest-digest/role/calendar/failure-bound single-evaluation authorization.
-- Predeclared coverage/tail/definition/publication/Runoff/terminal sensitivity without overwriting original results or using seen Holdout to choose settings.
-- New commodities/markets and genuinely observed business constraints with appropriate data rights and validation.
-- Owner-led license/Public decision after [release checks](PUBLIC_RELEASE_CHECKLIST.md).
+- 승인된 과거 전용 원천 Export·외부 hash·생성 근거를 사용한 제한적 실제 context와 Legacy 연결 검증
+- 실제 adapter 검증 후 별도 승인된 최종 연구평가; 최신 digest·역할·달력·실패 조건을 명시한 단회 범위 유지
+- 원래 결과를 보존하면서 Coverage·tail·정의 변경·공표 지연·Runoff·말기 근사를 사전에 정한 기준으로 검토
+- 적절한 이용권한을 확보한 다른 원재료·시장·관측 운영자료를 통한 외적 타당성 확인
 
-No new model, tuning, dashboard, NASA source, actual data execution or Public transition is required to close the current portfolio. [Roadmap](../ROADMAP.md) keeps these independent follow-ups separate.
+이 항목들은 현재 검증 수준을 설명하는 연구 확장 가능성입니다. 실제 원천 접근·모델 재튜닝·Holdout 평가·대시보드·NASA 수집을 이번 범위에서 수행하지 않습니다. 코드 라이선스는 소유자가 선택하기 전까지 미지정이며 데이터 이용조건과 구분합니다.

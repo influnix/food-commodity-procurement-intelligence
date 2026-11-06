@@ -115,7 +115,7 @@
     2,
     3
   ],
-  "interpretation": "Validation uses real market prices and synthetic operations; synthetic integration is a separate world; no corporate savings, causal effect or independent Holdout claim.",
+  "interpretation": "실제 Validation 시장가격과 가상 운영조건의 결과이며 합성 통합은 별도 경로입니다. 기업 절감 실적·인과효과·독립 Holdout 성능을 주장하지 않습니다.",
   "kind": "AGGREGATED_VALIDATION_AND_SYNTHETIC_VERIFICATION_NO_PRICE_ROWS",
   "mvp_acceptance": {
     "passed": 5,

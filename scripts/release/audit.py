@@ -1,4 +1,4 @@
-"""Audit an exact release allowlist without touching data or local artifacts."""
+"""원천·로컬 실행기록을 열지 않고 명시된 제품 파일의 안전성과 링크를 검사합니다."""
 
 import sys as _bootstrap_sys
 from pathlib import Path as _BootstrapPath
@@ -79,7 +79,7 @@ def audit_files(root: Path, names: tuple[str, ...]) -> dict:
                     problems.append({'path': name, 'reason': 'link_not_in_release', 'target': link})
     return {'passed': not problems, 'files': len(names), 'bytes': total_bytes, 'findings': problems,
             'sha256': hashes, 'scope': 'exact_allowlist_no_source_access',
-            'limitation': 'Pattern/content and size checks, not a guarantee of all possible secrets or redistribution rights'}
+            'limitation': '패턴·내용·크기 검사이며 모든 형태의 비밀정보 부재나 재배포 권한을 보증하지 않습니다'}
 
 
 def tracked_files(root: Path) -> tuple[str, ...]:

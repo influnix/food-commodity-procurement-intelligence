@@ -72,7 +72,7 @@ def freeze_candidate(root: Path,run: Path,repeat: Path) -> dict:
         gate=release_status(checks)
         boundary=execution_boundary(checks,datetime.now(timezone.utc),datetime.fromisoformat(c['publication_maturity_utc']))
         contract=[*sorted(p for p in (root/'configs').iterdir() if p.suffix in ('.toml','.json')),
-            *sorted((root/'requirements').glob('*-lock.txt')),root/'AGENTS.md',root/'pyproject.toml',
+            *sorted((root/'requirements').glob('*-lock.txt')),root/'docs/DATA_AND_ASOF_CONTRACT.md',root/'pyproject.toml',
             *[root/'docs'/n for n in ('DAY11_PRE_HOLDOUT_PROTOCOL.md','DAY11_LIMITATIONS.md','DAY12_PRODUCTION_INTEGRATION.md','DAY12_RELEASE_READINESS.md')]]
         code=[*sorted((root/'src').rglob('*.py')),*sorted((root/'tests').glob('test_*.py')),
             root/'scripts/compatibility/run_native_archive_tests.py',root/'scripts/validation/verify_native_integration.py',root/'scripts/compatibility/freeze_native_candidate.py']

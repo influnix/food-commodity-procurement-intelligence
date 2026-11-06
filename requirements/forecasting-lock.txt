@@ -1,5 +1,5 @@
-# Windows x64 / Python 3.11; focused model dependency closure, not global pip freeze.
-# Only statsmodels, lightgbm and patsy were newly installed in the project .venv.
+# Windows x64·Python 3.11의 예측 의존성 목록이며 전역 pip freeze가 아닙니다.
+# 프로젝트 가상환경에서 추가한 모델 패키지는 statsmodels·lightgbm·patsy입니다.
 lightgbm==4.6.0
 numpy==1.26.4
 packaging==24.1
