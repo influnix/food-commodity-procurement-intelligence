@@ -1,12 +1,14 @@
 # 데이터 및 시점별 정보 가용성 계약
 
+가격의 관측월과 그 가격을 알 수 있는 날짜는 다릅니다. 월평균 가격이 5월 행에 기록돼 있어도 6월 말에 공개되지 않았다면 그날의 발주에 쓸 수 없습니다. 그래서 월 라벨, 공개 시각, 공개 시각의 근거, 수집본 식별자를 분리해 저장합니다.
+
 ## 공식 원천과 데이터 구조
 
-기록된 출처는 [World Bank Commodity Markets](https://www.worldbank.org/en/research/commodity-markets)의 Pink Sheet 월별 과거 원자재 가격입니다. 수집 파일은 [CMO-Historical-Data-Monthly.xlsx](https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx)이며, 수집시각은 2026-10-24T01:29:17.500704Z, 크기는 586,099bytes입니다. Snapshot은 `20261024T012917500704Z_ea1c35082787`, SHA-256은 `ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154`입니다. 이는 과거 수집 메타데이터이며 문서화 작업에서 원천 가격을 다시 열거나 해시하지 않습니다.
+가격의 출처는 World Bank Pink Sheet입니다. 당시 수집한 파일의 크기는 586,099bytes이고, 수집시각은 2026-10-24T01:29:17.500704Z입니다. Snapshot `20261024T012917500704Z_ea1c35082787`과 SHA-256 `ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154`는 당시 저장한 사본을 식별하는 기록입니다. [World Bank Commodity Markets](https://www.worldbank.org/en/research/commodity-markets) · [CMO-Historical-Data-Monthly.xlsx](https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx)
 
 워크북 시트는 Mismatch Details(hidden), Monthly Prices, Monthly Indices, Description, Index Weights입니다. 가격 헤더는 5행, 단위는 6행, 데이터는 7..807행입니다. 날짜는 Excel 일련번호가 아닌 `1960M01` 형식의 텍스트이며 확인된 스키마에는 71개 계열이 있습니다.
 
-HRW는 미국 Gulf 수출 기준의 명목 USD/metric tonne 계열입니다. 기존 감사에서 1960-01..2026-09의 801개월에 결측·중복·월 누락이 없음을 확인했습니다. 별도 US SRW는 1979-01부터 573개 유효 관측과 초기 228개월 결측이 있습니다. Canada CWRS는 설명만 있고 가격 열이 없습니다. 계열을 평균내거나 결측을 임의로 채우지 않았습니다.
+미국 Gulf 수출 기준의 HRW를 대표 계열로 골랐습니다. 명목 USD/metric tonne 단위이고, 기존 감사에서 1960-01..2026-09의 801개월에 결측·중복·월 누락이 없었습니다. 별도 US SRW는 1979-01부터 573개 유효 관측과 초기 228개월 결측이 있습니다. Canada CWRS는 설명만 있고 가격 열이 없습니다. 산지와 등급이 다른 가격을 섞으면 발주 정책에서 어떤 지수를 정산 기준으로 보는지 불명확해지므로 HRW 한 계열을 그대로 사용했습니다.
 
 Parser는 `…`, `...`, `..`, 빈 값을 명시적 결측 token으로 보존하며 알 수 없는 문자열·수식·스키마 변경을 거부합니다. 원단위 `($/mt)`는 `USD_per_metric_tonne`로 정규화하며 인플레이션·환율 변환은 하지 않습니다. 월 라벨은 월초 거래가격을 뜻하지 않습니다.
 
@@ -21,9 +23,9 @@ Parser는 `…`, `...`, `..`, 빈 값을 명시적 결측 token으로 보존하�
 
 ## 사후 수정과 가격 정의 변경
 
-기록된 워크북 갱신일은 2026년 10월 02일입니다. HTTP Last-Modified·내부 수정시각·수집시각·페이지 최초 게시일은 서로 다르며 각 과거 관측의 최초 공표시각을 입증하지 않습니다. 워크북에는 2023/2024 SRW·phosphate 수정과 grain 서식 정정이 기록돼 있습니다. 최신 Snapshot만으로 역사적 Vintage를 복원할 수 없습니다.
+기록된 워크북 갱신일은 2026년 10월 02일입니다. HTTP Last-Modified, 내부 수정시각, 수집시각, 페이지 최초 게시일은 각각 파일이나 페이지의 상태를 설명합니다. 이 정보로 개별 가격의 최초 공표시각을 정할 수는 없습니다. 워크북의 2023/2024 SRW·phosphate 수정과 grain 서식 정정 기록은 같은 가격표도 나중에 수정될 수 있음을 보여줍니다. 과거 최초 발표본은 확보되지 않았으므로 최신 Snapshot과 다음 달 말 UTC 가용 가정으로 재현한 평가는 pseudo-real-time에 해당합니다.
 
-HRW는 2020-06까지 no.1, 2020-07부터 no.2 기준입니다. 모든 관측과 정의 경계 메타데이터를 유지합니다. 통계적 구조단절이나 품질의 인과적 가격효과가 입증된 것은 아닙니다. 기존 개발 감사에서 사전 20% 절대변동 기준을 넘은 7개월도 그대로 보존했습니다.
+HRW는 2020-06까지 no.1, 2020-07부터 no.2 기준입니다. 확인된 사실은 등급 정의가 달라진 시점입니다. 이후 차이가 품질 때문인지, 통계적 구조단절이 있었는지는 별도 검증이 필요합니다. 경계는 메타데이터에 표시하고 모든 관측을 유지했습니다. 기존 개발 감사에서 사전 20% 절대변동 기준을 넘은 7개월도 그대로 남겼습니다.
 
 완전 벡터의 경계 교차는 `o−1 < 2020-07 ≤ o+3`이며 2020-04..07의 4개 origin입니다. 변경 전후 또는 교차 표본 제외는 별도 민감도 가정이며, 임의의 넓은 구간을 제거하는 누수 방지 규칙으로 혼동하지 않습니다.
 
@@ -44,7 +46,7 @@ HRW는 2020-06까지 no.1, 2020-07부터 no.2 기준입니다. 모든 관측과 
 o<t,\qquad o+3\le t-1,\qquad \max_h available\_at(P_{o+h})\le d_t.
 ```
 
-따라서 `o≤t−4`가 필요하지만 공표가 늦으면 추가로 제외해야 합니다. 정적 구간의 target 집합과 현재 fold의 평가 target·학습 target은 겹칠 수 없습니다. 과거 Validation label은 고정 사양 아래 성숙한 뒤에만 후속 expanding 학습에 들어갑니다. Random Split·전체 표본 전처리·불필요한 대칭 embargo는 사용하지 않습니다. Validation Horizon 간 target 공유와 의존성은 의도된 평가 구조입니다.
+`o≤t−4`는 달력상 필요한 조건입니다. 마지막 label이 그보다 늦게 공개되면 해당 사례는 더 기다려야 합니다. 정적 분할의 target 집합은 서로 분리하고, 한 fold 안에서도 학습과 채점 target을 분리합니다. 과거 Validation label은 고정 사양 아래 성숙한 뒤 후속 expanding 학습에 들어갈 수 있습니다. 시간 순서와 공표 조건으로 학습 범위를 정하므로 Random Split·전체 표본 전처리·불필요한 대칭 embargo는 사용하지 않습니다. 서로 다른 origin에서 같은 달을 예측하는 Validation의 target 공유는 그 평가 구조에서 생깁니다.
 
 ## Legacy와 현재 실행의 증거
 
